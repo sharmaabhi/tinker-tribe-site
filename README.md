@@ -73,3 +73,17 @@ teammates) will need a backend + database — this static setup intentionally
 doesn't include one yet. When you're ready, Supabase or Firebase (both have
 free tiers) are a reasonable next step, added alongside this same static
 front end rather than replacing it.
+
+## 6. Knowledge library (`learn/`)
+
+- `learn/index.html` — the searchable library page (topic filters + search box)
+- `learn/*.html` — online lessons (robot car wiring, electronics, motors, aeromodeling, micro RC plane)
+- `learn/files/` — printable PDF guides (space, maths, English, birds)
+- `learn/diagrams/` — diagrams used inside the lessons
+
+To add a new PDF guide: put it in `learn/files/`, then copy one of the
+"Printable guide" cards in `learn/index.html` and change its link, title,
+description and `data-cat` / `cat-…` topic.
+
+Keep the photo credits printed inside the bird guides — those photos are
+Creative Commons licensed and the licence requires the credit line.

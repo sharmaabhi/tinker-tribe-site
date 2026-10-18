@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Electronics Fundamentals — Tinker Tribe</title>
+<meta name="description" content="Resistors, capacitors, transistors, regulators and filters — plus seven example circuits every builder should know.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="icon" type="image/svg+xml" href="../tinkertribe-mark.svg">
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="../index.html" class="wordmark"><img src="../tinkertribe-full.svg" alt="Tinker Tribe" class="wordmark-logo"></a>
+    <nav class="main-nav" id="main-nav">
+      <a href="../index.html#topics">Topics</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../learn/index.html">Learn</a>
+      <a href="../index.html#workshops">Workshops</a>
+      <a href="../index.html#join" class="nav-cta">Join a workshop</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main>
+<section class="lesson-hero cat-robotics">
+  <div class="wrap lesson-hero-grid">
+   <div>
+    <a class="back-link" href="index.html">← Knowledge library</a>
+    <span class="project-tag">Robotics &amp; Electronics</span>
+    <h1>Electronics Fundamentals</h1>
+    <p class="lesson-lede">Resistors, capacitors, transistors, regulators and filters — plus seven example circuits every builder should know.</p>
+    <div class="lesson-meta"><span>Beginner → Intermediate</span><span>26 min read</span><a class="btn btn-ghost btn-small" href="files/electronics-fundamentals.pdf" download>Download PDF</a></div>
+   </div>
+   <img class="lesson-hero-art" src="../images/electronics.svg" alt="">
+  </div>
+</section>
+<div class="wrap lesson-layout">
+  <aside class="lesson-toc"><p class="toc-title">On this page</p><ol><li><a href="#1-passive-components">1. Passive Components</a></li><li><a href="#2-reading-component-values">2. Reading Component Values</a></li><li><a href="#3-active-components">3. Active Components</a></li><li><a href="#4-key-ics-youll-actually-use">4. Key ICs You'll Actually Use</a></li><li><a href="#5-voltage-regulation">5. Voltage Regulation</a></li><li><a href="#6-filters">6. Filters</a></li><li><a href="#7-when-to-use-what--decision-guide">7. When to Use What — Decision Guide</a></li><li><a href="#8-functional-example-circuits">8. Functional Example Circuits</a></li><li><a href="#9-digital-vs-analog-io">9. Digital vs. Analog I/O</a></li><li><a href="#10-microcontrollers-arduino-esp32-raspberry-pi">10. Microcontrollers: Arduino, ESP32, Raspberry Pi</a></li><li><a href="#11-power-supply-fundamentals">11. Power Supply Fundamentals</a></li><li><a href="#12-prototyping-tools--safety">12. Prototyping, Tools &amp; Safety</a></li><li><a href="#13-suggested-learning-path">13. Suggested Learning Path</a></li></ol></aside>
+  <article class="lesson-body">
+<hr />
+<h2 id="1-passive-components">1. Passive Components</h2>
+<h3 id="resistors">Resistors</h3>
+<p>Limit current flow. Used constantly — current limiting (LEDs), pull-up/pull-down for digital pins, voltage dividers, timing (with capacitors).</p>
+<p><strong>Key spec beyond resistance value</strong>: power rating (watts). A standard through-hole resistor is usually <strong>1/4W (0.25W)</strong> — fine for signal-level circuits, but check the math for anything driving real current (see Ohm's law calculations in Section 7).</p>
+<h3 id="capacitors">Capacitors</h3>
+<p>Store and release electrical charge. Fundamentally different uses depending on type:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Characteristics</th>
+<th>Typical Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Ceramic</strong></td>
+<td>Small, cheap, no polarity, low capacitance (pF to a few µF)</td>
+<td>Decoupling/filtering noise near ICs, high-frequency filtering</td>
+</tr>
+<tr class="even">
+<td><strong>Electrolytic</strong></td>
+<td>Larger capacitance (µF to thousands of µF), <strong>has polarity</strong> — reversing it can cause it to fail/vent/explode</td>
+<td>Power supply smoothing, bulk energy storage</td>
+</tr>
+<tr class="odd">
+<td><strong>Tantalum</strong></td>
+<td>Compact, stable, has polarity, more expensive</td>
+<td>Precision analog circuits, space-constrained designs</td>
+</tr>
+<tr class="even">
+<td><strong>Film</strong></td>
+<td>Very stable, no polarity, larger physical size for given capacitance</td>
+<td>Audio circuits, timing circuits needing precision</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Golden rule</strong>: put a small ceramic capacitor (0.1µF, often written "104") close to the power pins of <em>every</em> IC you use. This is called a <strong>decoupling capacitor</strong> — it suppresses tiny voltage spikes/noise that would otherwise cause erratic IC behavior. Skipping this is one of the most common causes of "my circuit works on the breadboard but glitches randomly."</p>
+<h3 id="inductors">Inductors</h3>
+<p>Resist changes in current (the opposite tendency of a capacitor, which resists changes in voltage). Less commonly hand-selected by hobbyists directly, but they're the key component inside every buck/boost converter module you've already been using (like your SY8205) — they store energy magnetically during switching to smooth the output.</p>
+<h3 id="diodes">Diodes</h3>
+<p>Allow current to flow in one direction only.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Standard rectifier diode (1N4001-1N4007 family)</strong></td>
+<td>AC-to-DC conversion, reverse-polarity protection</td>
+</tr>
+<tr class="even">
+<td><strong>LED</strong></td>
+<td>Light-emitting — always needs a current-limiting resistor in series</td>
+</tr>
+<tr class="odd">
+<td><strong>Zener diode</strong></td>
+<td>Clamps voltage at a specific level — used for simple voltage reference/protection</td>
+</tr>
+<tr class="even">
+<td><strong>Schottky diode</strong></td>
+<td>Faster switching, lower voltage drop — used in efficient power circuits, flyback protection for motors/relays</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Flyback diode</strong>: whenever you switch a motor, relay, or any inductive load with a transistor, put a diode across the load (cathode to positive) to absorb the voltage spike generated when current suddenly stops — without this, you can destroy the switching transistor.</p>
+<hr />
+<h2 id="2-reading-component-values">2. Reading Component Values</h2>
+<h3 id="resistor-color-code-4-band-most-common">Resistor Color Code (4-band, most common)</h3>
+<p>Each band is a digit or multiplier, read left to right:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Color</th>
+<th>Digit</th>
+<th>Multiplier</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Black</td>
+<td>0</td>
+<td>×1</td>
+</tr>
+<tr class="even">
+<td>Brown</td>
+<td>1</td>
+<td>×10</td>
+</tr>
+<tr class="odd">
+<td>Red</td>
+<td>2</td>
+<td>×100</td>
+</tr>
+<tr class="even">
+<td>Orange</td>
+<td>3</td>
+<td>×1,000</td>
+</tr>
+<tr class="odd">
+<td>Yellow</td>
+<td>4</td>
+<td>×10,000</td>
+</tr>
+<tr class="even">
+<td>Green</td>
+<td>5</td>
+<td>×100,000</td>
+</tr>
+<tr class="odd">
+<td>Blue</td>
+<td>6</td>
+<td>×1,000,000</td>
+</tr>
+<tr class="even">
+<td>Violet</td>
+<td>7</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Grey</td>
+<td>8</td>
+<td>—</td>
+</tr>
+<tr class="even">
+<td>White</td>
+<td>9</td>
+<td>—</td>
+</tr>
+<tr class="odd">
+<td>Gold</td>
+<td>—</td>
+<td>×0.1 (tolerance ±5%)</td>
+</tr>
+<tr class="even">
+<td>Silver</td>
+<td>—</td>
+<td>×0.01 (tolerance ±10%)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Example</strong>: Brown-Black-Red-Gold = 1, 0, ×100, ±5% → <strong>1,000Ω (1kΩ), 5% tolerance</strong></p>
+<p>The 4th band (gold/silver/brown) is the <strong>tolerance</strong> — how much the actual value can vary from nominal. For most hobby work, 5% is fine.</p>
+<h3 id="capacitor-codes">Capacitor Codes</h3>
+<p><strong>Values printed directly</strong> (e.g., "10µF", "0.1µF") are self-explanatory. But small ceramic capacitors often use a <strong>3-digit code</strong>:</p>
+<p><strong>First two digits = value, third digit = multiplier (in picofarads, pF)</strong></p>
+<p>Example: <strong>"104"</strong> = 10 × 10⁴ pF = 100,000 pF = <strong>0.1µF</strong> (this is the standard decoupling capacitor value mentioned above)</p>
+<p>Example: <strong>"475"</strong> = 47 × 10⁵ pF = 4,700,000 pF = <strong>4.7µF</strong></p>
+<h3 id="smd-surface-mount-marking-basics">SMD (Surface-Mount) Marking Basics</h3>
+<p>Surface-mount resistors often use a 3 or 4-digit code similar to capacitors (e.g., "103" = 10×10³ = 10,000Ω = 10kΩ). Surface-mount capacitors are frequently <strong>unmarked entirely</strong> due to size — you'll need to check the schematic/datasheet or measure with an LCR meter if you're reverse-engineering a board.</p>
+<hr />
+<h2 id="3-active-components">3. Active Components</h2>
+<h3 id="transistors--the-basic-switchamplifier">Transistors — The Basic Switch/Amplifier</h3>
+<p>A transistor is fundamentally a <strong>controllable switch/valve</strong> — a small signal at one terminal controls a much larger flow of current between the other two terminals. This single concept underlies almost all modern electronics, from a simple LED driver to the billions of transistors inside a CPU.</p>
+<h4 id="bjt-bipolar-junction-transistor">BJT (Bipolar Junction Transistor)</h4>
+<p><strong>3 terminals</strong>: Base, Collector, Emitter. <strong>Controlled by current</strong> — a small current into the Base allows a much larger current to flow from Collector to Emitter. The ratio between them is the <strong>hFE (current gain)</strong>, typically 100-300 for common types.</p>
+<ul>
+<li><strong>NPN</strong> (e.g., 2N2222, BC547) — the more common type, switches on when Base is more positive than Emitter</li>
+<li><strong>PNP</strong> (e.g., 2N2907) — mirror-image type, switches on when Base is more negative than Emitter</li>
+</ul>
+<p><strong>Example: switching an LED that needs more current than a microcontroller pin can safely supply directly</strong> (most microcontroller pins max out around 20-40mA):</p>
+<pre><code>Microcontroller pin ── Resistor (~1kΩ) ── Base
+                                  Collector ── LED ── Resistor ── V+
+                                  Emitter ── GND</code></pre>
+<p>The small Base current (via the resistor) allows a much larger Collector-to-Emitter current to flow — the transistor does the "heavy lifting" the microcontroller pin couldn't do alone.</p>
+<h4 id="mosfet-metal-oxide-semiconductor-field-effect-transistor">MOSFET (Metal-Oxide-Semiconductor Field-Effect Transistor)</h4>
+<p><strong>3 terminals</strong>: Gate, Drain, Source. <strong>Controlled by voltage, not current</strong> — once the Gate reaches a threshold voltage relative to the Source, the MOSFET switches fully on and draws essentially <strong>zero continuous current</strong> to stay there (unlike a BJT, which needs continuous base current). This makes MOSFETs far more efficient for switching, especially in battery-powered projects.</p>
+<ul>
+<li><strong>N-channel</strong> (e.g., IRLZ44N) — far more common in hobby projects</li>
+<li><strong>P-channel</strong> — less common, used in specific high-side switching situations</li>
+</ul>
+<p><strong>Critical detail — logic-level vs. standard</strong>: many MOSFETs (like the classic IRFZ44N) need <strong>10-12V</strong> at the gate to fully switch on — a 3.3V/5V microcontroller pin can't drive them properly, leaving them partially on and wasting power as heat. <strong>Logic-level MOSFETs</strong> (like IRLZ44N — note the "L") are specifically designed to switch fully on at 3.3V-5V, making them the correct choice for direct microcontroller control.</p>
+<h4 id="bjt-vs-mosfet--when-to-pick-which">BJT vs. MOSFET — When to Pick Which</h4>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th></th>
+<th>BJT</th>
+<th>MOSFET (logic-level)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Control signal</td>
+<td>Current</td>
+<td>Voltage</td>
+</tr>
+<tr class="even">
+<td>Switching efficiency</td>
+<td>Lower (continuous base current wastes some power)</td>
+<td>Higher (near-zero holding current)</td>
+</tr>
+<tr class="odd">
+<td>Good for</td>
+<td>Small/simple loads, cheap and simple designs</td>
+<td>Motors, higher-current loads, anything battery-efficiency-sensitive</td>
+</tr>
+<tr class="even">
+<td>Common hobby parts</td>
+<td>2N2222, BC547</td>
+<td>IRLZ44N (logic-level), IRFZ44N (needs a gate driver — do not drive directly from a microcontroller pin)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Practical rule</strong>: for anything switching real current in a battery-powered robot/project (motors, higher-power LEDs, relays) — use a logic-level MOSFET. For simple, low-current signal-level switching — a basic BJT is fine and cheaper.</p>
+<h4 id="transistors-as-amplifiers-beyond-switching">Transistors as Amplifiers (Beyond Switching)</h4>
+<p>Both BJTs and MOSFETs can also operate in their <strong>linear/active region</strong> (partially on, not fully on/off) to amplify a small signal into a larger one — this is how audio amplifiers, radio circuits, and analog sensor conditioning work. This is a genuinely different design discipline from switching (needs careful biasing and gain calculation). For robotics/microcontroller work, you'll use transistors almost exclusively in <strong>switching mode</strong> — worth knowing amplification mode exists, but not essential to master right away.</p>
+<h3 id="why-you-rarely-build-your-own-motor-driver">Why You Rarely Build Your Own Motor Driver</h3>
+<p>The H-bridge circuits (TB6612FNG, L298N) you've already used in your robot build are essentially <strong>4 MOSFETs or BJTs arranged to allow current flow in either direction</strong> through a motor, safely. Building this from individual transistors is a good learning exercise, but for real projects, buying the pre-built driver IC is faster, safer, and already handles edge cases (like preventing both high and low side switches from conducting simultaneously, which would short the power supply).</p>
+<hr />
+<h2 id="4-key-ics-youll-actually-use">4. Key ICs You'll Actually Use</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>IC</th>
+<th>Function</th>
+<th>Typical Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>555 Timer</strong></td>
+<td>Configurable timing/oscillator chip — astable (continuous pulsing) or monostable (single timed pulse) modes</td>
+<td>Blinking LEDs, simple PWM generation, basic tone generation, timing delays without a microcontroller</td>
+</tr>
+<tr class="even">
+<td><strong>LM358 (Op-Amp)</strong></td>
+<td>Amplifies the difference between two input voltages</td>
+<td>Sensor signal amplification, simple voltage comparators, audio preamps</td>
+</tr>
+<tr class="odd">
+<td><strong>LM386 (Audio Power Amp)</strong></td>
+<td>Low-power audio amplifier, single supply, ×20 default gain (×200 with a gain capacitor)</td>
+<td>Driving small speakers directly from a weak audio signal — see Circuit 7 in Section 8</td>
+</tr>
+<tr class="even">
+<td><strong>7805 / AMS1117</strong></td>
+<td>Linear voltage regulator (fixed output, e.g., 5V or 3.3V)</td>
+<td>Simple, cheap regulation when efficiency doesn't matter and input-output voltage difference is small</td>
+</tr>
+<tr class="odd">
+<td><strong>74HC595 (Shift Register)</strong></td>
+<td>Controls multiple outputs (e.g., 8 LEDs) using just 3 microcontroller pins</td>
+<td>Expanding limited GPIO pins, driving LED displays</td>
+</tr>
+<tr class="even">
+<td><strong>ULN2003 (Darlington Array)</strong></td>
+<td>7 channels of high-current switching, commonly paired with small stepper motors</td>
+<td>Driving small steppers, relays, or other moderate-current loads directly from logic-level signals</td>
+</tr>
+<tr class="odd">
+<td><strong>PCF8574 (I2C GPIO expander)</strong></td>
+<td>Adds 8 GPIO pins accessible over I2C (2 wires)</td>
+<td>Exactly what your LCD I2C backpack used — expanding pins over a simple 2-wire bus</td>
+</tr>
+<tr class="even">
+<td><strong>ADS1115 (I2C ADC)</strong></td>
+<td>Adds 4 channels of precise analog-to-digital conversion over I2C</td>
+<td>Reading analog sensors on boards (like the Pi) that lack a built-in ADC</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="5-voltage-regulation">5. Voltage Regulation</h2>
+<h3 id="linear-vs-switching-buck-regulators">Linear vs. Switching (Buck) Regulators</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Linear (e.g., 7805)</th>
+<th>Switching/Buck (e.g., your SY8205)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Efficiency</td>
+<td>Poor — wastes excess voltage as heat</td>
+<td>High — typically 85-95%+</td>
+</tr>
+<tr class="even">
+<td>Complexity</td>
+<td>Very simple, few parts</td>
+<td>More complex internally, but usually sold as a ready module</td>
+</tr>
+<tr class="odd">
+<td>Heat generation</td>
+<td>Significant if input/output voltage gap is large</td>
+<td>Minimal</td>
+</tr>
+<tr class="even">
+<td>Noise</td>
+<td>Very clean output</td>
+<td>Slightly noisier (switching frequency ripple), usually not an issue</td>
+</tr>
+<tr class="odd">
+<td>Best for</td>
+<td>Small voltage drops, low current, simplicity matters most</td>
+<td>Anything with meaningful current draw or a large voltage drop — like stepping your robot's 11.1V down to 5V</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Rule of thumb</strong>: if you're dropping more than ~2-3V and drawing more than a few hundred mA, use a switching/buck regulator — a linear regulator would waste significant power as heat and could overheat. This is exactly why your robot build uses the SY8205 (buck) rather than a simple 7805 to go from 11.1V to 5V.</p>
+<hr />
+<h2 id="6-filters">6. Filters</h2>
+<h3 id="what-a-filter-actually-does">What a Filter Actually Does</h3>
+<p>A filter shapes a signal based on <strong>frequency</strong> — passing some frequencies through while blocking or attenuating others. In robotics/electronics work, filters show up in two main contexts: <strong>cleaning up power supplies</strong> (removing ripple/noise from a DC rail) and <strong>conditioning signals</strong> (removing unwanted noise from a sensor reading, or shaping a control signal).</p>
+<h3 id="the-four-basic-filter-types-by-frequency-response">The Four Basic Filter Types (by frequency response)</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Passes</th>
+<th>Blocks</th>
+<th>Typical Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Low-pass</strong></td>
+<td>Low frequencies</td>
+<td>High frequencies</td>
+<td>Removing high-frequency noise, smoothing a signal</td>
+</tr>
+<tr class="even">
+<td><strong>High-pass</strong></td>
+<td>High frequencies</td>
+<td>Low frequencies</td>
+<td>Removing DC offset/slow drift, isolating fast changes</td>
+</tr>
+<tr class="odd">
+<td><strong>Band-pass</strong></td>
+<td>A specific frequency range</td>
+<td>Everything outside that range</td>
+<td>Radio tuning, isolating a specific sensor signal frequency</td>
+</tr>
+<tr class="even">
+<td><strong>Band-stop (notch)</strong></td>
+<td>Everything except a specific range</td>
+<td>One specific frequency</td>
+<td>Removing a known noise frequency (e.g., 50/60Hz mains hum)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="passive-rc-filters-resistor--capacitor--the-simplest-most-common">Passive RC Filters (Resistor + Capacitor) — the simplest, most common</h3>
+<p><strong>Low-pass RC filter</strong>:</p>
+<pre><code>V_in ── Resistor ──┬── V_out
+                    │
+                 Capacitor
+                    │
+                   GND</code></pre>
+<p><strong>Cutoff frequency</strong>: <code>f_c = 1 / (2π × R × C)</code></p>
+<p>Frequencies below <code>f_c</code> pass through mostly unaffected; frequencies above <code>f_c</code> are increasingly attenuated. This exact circuit is extremely common for cleaning up a noisy analog sensor reading before it reaches an ADC pin.</p>
+<p><strong>High-pass RC filter</strong> — same two components, swapped positions:</p>
+<pre><code>V_in ── Capacitor ──┬── V_out
+                     │
+                  Resistor
+                     │
+                    GND</code></pre>
+<p><strong>Worked example</strong>: with R = 10kΩ and C = 1µF:</p>
+<pre><code>f_c = 1 / (2π × 10,000 × 0.000001) ≈ 15.9 Hz</code></pre>
+<p>A low-pass filter with these values would smooth out fast electrical noise while passing slower signal changes (like a slowly-varying sensor reading) through cleanly.</p>
+<h3 id="lc-filters-inductor--capacitor--used-in-power-electronics">LC Filters (Inductor + Capacitor) — used in power electronics</h3>
+<p>More effective than RC filters at power-supply frequencies, and don't dissipate as much energy as heat (inductors and capacitors both <em>store</em> energy rather than burning it off like a resistor does). This is exactly the combination inside every buck converter you've used (like your SY8205) — the inductor and output capacitor together smooth the rapidly-switching internal voltage into the clean, steady DC output you actually measure with a multimeter.</p>
+<h3 id="power-supply-ripple-filtering">Power Supply Ripple Filtering</h3>
+<p>After rectifying AC to DC (or after a switching regulator's internal switching), the raw output isn't perfectly smooth — it has <strong>ripple</strong>, small unwanted fluctuations. <strong>Bulk electrolytic capacitors</strong> (typically 100-1000µF+) placed across the output absorb these fluctuations, and smaller ceramic capacitors (the same 0.1µF decoupling caps from Section 1) handle the faster, smaller residual noise that the bulk capacitor is too slow to catch. <strong>Using both together — one bulk electrolytic, one small ceramic, in parallel — is standard practice</strong>, not redundant.</p>
+<h3 id="current-filters--noise-suppression-and-current-related-protection">"Current Filters" — Noise Suppression and Current-Related Protection</h3>
+<p>A few distinct things fall under this umbrella, worth distinguishing clearly:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Component/Technique</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Ferrite bead/choke</strong></td>
+<td>A small component threaded onto a power or signal wire that suppresses high-frequency noise/EMI without affecting the intended DC or low-frequency signal — common on USB cables and motor power leads to reduce electrical interference</td>
+</tr>
+<tr class="even">
+<td><strong>Common-mode choke</strong></td>
+<td>Similar purpose, specifically targets noise that appears identically on both power and ground lines together</td>
+</tr>
+<tr class="odd">
+<td><strong>Decoupling capacitor</strong> (revisited)</td>
+<td>As covered in Section 1 — technically a localized high-frequency filter right at an IC's power pins</td>
+</tr>
+<tr class="even">
+<td><strong>Current-limiting resistor</strong></td>
+<td>Not a frequency filter — limits the <em>magnitude</em> of current (covered in Section 1/7), a different concept from frequency filtering despite the similar-sounding name</td>
+</tr>
+<tr class="odd">
+<td><strong>PTC resettable fuse</strong></td>
+<td>A current-limiting protection device that increases resistance sharply when current exceeds a threshold (heats up, self-limits), then resets automatically once the fault clears and it cools down — unlike a one-time blow fuse</td>
+</tr>
+<tr class="even">
+<td><strong>NTC thermistor (inrush limiter)</strong></td>
+<td>Placed in series with power input, starts with higher resistance when cold (limiting the initial current surge when powering on), then drops to low resistance during normal operation</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Practical relevance to your builds</strong>: the ripple you might see on your robot's motor power rail (from motor brush noise or switching) is exactly the kind of interference a ferrite bead on the motor's power leads helps suppress — worth adding if you ever notice your ESP32 or Pi behaving erratically specifically when the motors are running, since that's a classic symptom of motor electrical noise coupling into your logic circuits through a shared, insufficiently filtered power rail.</p>
+<h3 id="active-filters-op-amp-based">Active Filters (Op-Amp Based)</h3>
+<p>RC and LC filters are <strong>passive</strong> — no amplification, and the resistor/capacitor values interact with whatever's connected afterward (loading effects). <strong>Active filters</strong> add an op-amp to the circuit, giving more precise control over the cutoff frequency and the steepness of the transition, independent of what's connected downstream. This is a step up in complexity mainly relevant for precision audio or instrumentation work — for typical robotics sensor cleanup, a simple passive RC filter is usually sufficient.</p>
+<h2 id="7-when-to-use-what--decision-guide">7. When to Use What — Decision Guide</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Need to limit current to an LED</td>
+<td>Resistor (calculate value — see Section 7)</td>
+</tr>
+<tr class="even">
+<td>Need to filter noise near an IC's power pins</td>
+<td>0.1µF ceramic capacitor</td>
+</tr>
+<tr class="odd">
+<td>Need to smooth a rectified DC power supply</td>
+<td>Electrolytic capacitor (larger value, e.g., 100-1000µF)</td>
+</tr>
+<tr class="even">
+<td>Need to switch a motor/high-current load from a microcontroller pin</td>
+<td>Logic-level MOSFET, or a pre-built driver IC (TB6612FNG, L298N)</td>
+</tr>
+<tr class="odd">
+<td>Need to switch a small, low-current load (single LED, small relay coil)</td>
+<td>BJT transistor is often sufficient and cheaper</td>
+</tr>
+<tr class="even">
+<td>Need a stable digital "high" or "low" when a pin isn't actively driven</td>
+<td>Pull-up or pull-down resistor (typically 10kΩ)</td>
+</tr>
+<tr class="odd">
+<td>Need to protect a transistor switching a motor/relay</td>
+<td>Flyback diode across the load</td>
+</tr>
+<tr class="even">
+<td>Need to drop voltage with minimal complexity, low current, small voltage gap</td>
+<td>Linear regulator (7805, AMS1117)</td>
+</tr>
+<tr class="odd">
+<td>Need to drop voltage efficiently with meaningful current or large voltage gap</td>
+<td>Switching/buck regulator module</td>
+</tr>
+<tr class="even">
+<td>Need more digital output pins than your microcontroller has</td>
+<td>Shift register (74HC595) or I2C GPIO expander (PCF8574)</td>
+</tr>
+<tr class="odd">
+<td>Need to read an analog sensor but your board's ADC isn't precise/available enough</td>
+<td>Dedicated ADC IC (ADS1115) over I2C</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="8-functional-example-circuits">8. Functional Example Circuits</h2>
+<h3 id="circuit-1-led-current-limiting-resistor-the-calculation-everyone-should-know">Circuit 1: LED Current-Limiting Resistor (the calculation everyone should know)</h3>
+<pre><code>Microcontroller Pin (e.g., 3.3V or 5V) ── Resistor ── LED (anode → cathode) ── GND</code></pre>
+<p><strong>Ohm's Law calculation</strong>:</p>
+<pre><code>R = (V_source − V_LED) / I_LED</code></pre>
+<p>For a standard red LED (V_LED ≈ 2V, I_LED ≈ 15mA) on a 5V pin:</p>
+<pre><code>R = (5V − 2V) / 0.015A = 200Ω</code></pre>
+<p>A 220Ω resistor (a standard, easily available value) is the typical practical choice — close enough, and errs slightly toward protecting the LED rather than exactly maximizing brightness.</p>
+<h3 id="circuit-2-voltage-divider-for-sensor-reading">Circuit 2: Voltage Divider (for sensor reading)</h3>
+<pre><code>V_in ── R1 ── [tap point → ADC pin] ── R2 ── GND</code></pre>
+<p><strong>Formula</strong>: <code>V_out = V_in × (R2 / (R1 + R2))</code></p>
+<p>This is exactly the circuit you used for the HC-SR04 sonar's Echo line (stepping 5V down to a safe ~3.3V for an ESP32 GPIO) — the same fundamental circuit shows up everywhere: reading a higher voltage safely, or converting a variable-resistance sensor (like an LDR light sensor or a thermistor) into a readable voltage.</p>
+<h3 id="circuit-3-pull-up-resistor-for-a-button-input">Circuit 3: Pull-Up Resistor for a Button Input</h3>
+<pre><code>3.3V/5V ── Resistor (10kΩ) ── [tap point → digital input pin]
+                                      │
+                                    Button
+                                      │
+                                     GND</code></pre>
+<p>Without this resistor, an unpressed button leaves the input pin "floating" — reading random noise instead of a clean HIGH or LOW. The pull-up resistor ensures the pin reads a clean <strong>HIGH</strong> when the button is unpressed, and <strong>LOW</strong> when pressed (since pressing connects the pin directly to ground, overpowering the weaker pull-up). Most modern microcontrollers (ESP32, Arduino) have this resistor built in via software (<code>INPUT_PULLUP</code> mode) — genuinely useful to know both the internal option and how to build it discretely.</p>
+<h3 id="circuit-4-simple-555-timer-astable-blinking-led--basic-pwm">Circuit 4: Simple 555 Timer Astable (Blinking LED / Basic PWM)</h3>
+<pre><code>        ┌──────┐
+V+ ─────┤ 555  │
+     ┌──┤Timer ├──┐
+    R1  │(Astable)│  R2 (feedback resistor network)
+     └──┤      ├──┘
+  C1 ───┤      ├─── Output → LED (via resistor) or PWM-like signal
+        └──────┘</code></pre>
+<p>The 555 Timer in astable mode continuously charges and discharges a capacitor (C1) through resistors (R1, R2), producing a repeating on/off output. <strong>Frequency is set by the R1/R2/C1 values</strong> (standard formula available in any 555 datasheet/calculator) — this is how you'd blink an LED or generate a basic tone/PWM signal <strong>without any microcontroller at all</strong>, useful for understanding timing circuits at the component level before relying on a microcontroller's built-in timer functions.</p>
+<h3 id="circuit-5-basic-h-bridge-concept-why-motor-drivers-work-the-way-they-do">Circuit 5: Basic H-Bridge Concept (Why Motor Drivers Work the Way They Do)</h3>
+<pre><code>        V+
+         │
+    ┌────┴────┐
+    │         │
+  Switch A  Switch C
+    │         │
+    ├─Motor───┤
+    │         │
+  Switch B  Switch D
+    │         │
+    └────┬────┘
+         │
+        GND</code></pre>
+<p>Closing <strong>A and D</strong> (diagonal pair) drives the motor one direction. Closing <strong>B and C</strong> (the other diagonal pair) reverses it. <strong>Never close A and B together, or C and D together</strong> — that directly shorts V+ to GND. This is exactly the logic your TB6612FNG/L298N modules implement internally with transistors/MOSFETs instead of mechanical switches, with built-in protection against the "both switches on the same side" short-circuit scenario.</p>
+<h3 id="circuit-6-simple-op-amp-comparator-threshold-detector">Circuit 6: Simple Op-Amp Comparator (Threshold Detector)</h3>
+<pre><code>Sensor voltage (e.g., from an LDR voltage divider) ── Op-Amp (+) input
+Reference voltage (set via a potentiometer)         ── Op-Amp (−) input
+Op-Amp output ── goes HIGH or LOW depending on which input is greater</code></pre>
+<p>This is how a simple "trigger when light level drops below X" or "trigger when temperature exceeds Y" circuit works <strong>without needing a microcontroller and code at all</strong> — genuinely useful for simple, reliable threshold-triggered behavior (e.g., an automatic night light), and a good way to understand what your microcontroller's ADC + <code>if</code> statement is actually replacing when you do it in software instead.</p>
+<h3 id="circuit-7-lm386-audio-amplifier-driving-a-small-speaker">Circuit 7: LM386 Audio Amplifier (Driving a Small Speaker)</h3>
+<p>The <strong>LM386</strong> is the classic, extremely common low-power audio amplifier IC — cheap, simple, runs from a single supply (4-12V), and is the standard building block for exactly the kind of small-speaker projects you've already been wiring (conceptually the same job your Waveshare sound card's onboard amp is doing internally, just as a discrete, build-it-yourself version).</p>
+<p><strong>Basic circuit (default gain ×20)</strong>:</p>
+<pre><code>Audio signal in ── Capacitor (10µF) ── Pin 3 (+ input)
+Pin 2 (− input) ── GND
+Pin 4 ── GND
+Pin 6 ── V+ (e.g., 9V, or your 1S/2S battery rail)
+Pin 5 (output) ── Capacitor (250µF) ── Speaker (+) 
+Speaker (−) ── GND
+Pin 7 ── Capacitor (0.1µF) ── GND   (bypass, reduces supply noise)</code></pre>
+<p><strong>Gain-boost option (×200)</strong>: bridge <strong>Pin 1 to Pin 8</strong> through a 10µF capacitor. Left disconnected, the LM386 runs at its default ×20 gain — the boosted ×200 mode is useful when your input signal (e.g., straight from a microcontroller's low-level audio output) is too weak to drive a speaker to a useful volume at the lower gain setting.</p>
+<p><strong>Volume control</strong> (optional): replace the fixed input coupling path with a <strong>potentiometer</strong> (10kΩ) between the audio source and Pin 3 — turning it adjusts how much signal reaches the amplifier's input, giving manual volume control.</p>
+<p><strong>Why the capacitors matter here specifically</strong>:</p>
+<ul>
+<li><strong>Input capacitor (10µF)</strong>: blocks any DC offset from the source signal, passing only the actual audio (AC) signal through — a real-world application of the high-pass filter concept from Section 6</li>
+<li><strong>Output capacitor (250µF)</strong>: blocks DC from reaching the speaker coil directly (which would just waste power as heat and offer no sound), while passing the audio signal through</li>
+<li><strong>Pin 7 bypass capacitor (0.1µF)</strong>: same decoupling principle from Section 1 — keeps supply noise from leaking into the amplified audio as hum/hiss</li>
+</ul>
+<p><strong>Power supply note</strong>: this is a good candidate for the <strong>bulk + small capacitor combination</strong> from Section 6's power supply ripple filtering — add a larger electrolytic (e.g., 100µF) directly across V+/GND near the chip if you notice any hum, especially if powering from a switching buck converter rather than a clean linear supply.</p>
+<p><strong>Speaker impedance matching</strong>: LM386 is commonly used with <strong>8Ω speakers</strong>, though it can drive 4Ω loads at reduced maximum output — relevant directly to the speaker impedance-matching question from your own robot build (checking whether your JBL teardown driver was 4Ω or 8Ω applies exactly the same way here).</p>
+<hr />
+<h2 id="9-digital-vs-analog-io">9. Digital vs. Analog I/O</h2>
+<p>Before looking at specific microcontrollers, it's worth understanding the fundamental distinction in how <em>any</em> microcontroller pin can behave — this governs what you can and can't do with a given pin, on every board you'll ever use.</p>
+<h3 id="digital-io--only-two-states">Digital I/O — Only Two States</h3>
+<p>A digital pin reads or outputs only <strong>HIGH</strong> or <strong>LOW</strong> — nothing in between. In practice, a pin is read as HIGH above roughly 60-70% of the supply voltage (e.g., above ~2.3V on a 3.3V system) and LOW below roughly 30% — there's a real analog voltage underneath, but the microcontroller collapses it into a binary decision.</p>
+<ul>
+<li><strong>Digital input</strong>: reading a button, a switch, or any sensor that itself outputs a clean HIGH/LOW signal (e.g., many simple motion sensors, limit switches)</li>
+<li><strong>Digital output</strong>: turning an LED fully on/off, driving a relay, sending a HIGH/LOW signal to another chip</li>
+</ul>
+<h3 id="analog-input--a-continuous-range-read-via-adc">Analog Input — A Continuous Range, Read via ADC</h3>
+<p>Real-world signals (a potentiometer's position, a light sensor's brightness, a battery's exact voltage) vary continuously, not just between two states. An <strong>ADC (Analog-to-Digital Converter)</strong> — built into most microcontrollers — samples this continuous voltage and converts it into a number your code can use.</p>
+<p><strong>Resolution matters</strong>: a 10-bit ADC (common on Arduino) divides the input voltage range into 1,024 steps (0-1023). A 12-bit ADC (common on ESP32) divides it into 4,096 steps (0-4095) — finer resolution, more precise readings.</p>
+<p><strong>Worked example</strong>: on an Arduino (10-bit ADC, 5V reference), reading a raw value of 512 corresponds to:</p>
+<pre><code>V = (raw_value / 1023) × V_reference = (512 / 1023) × 5V ≈ 2.5V</code></pre>
+<p><strong>Not every pin can do this</strong> — check your specific board's pinout; only pins explicitly marked as analog-capable (often labeled "A0, A1..." on Arduino, or specific ADC-capable GPIOs on ESP32) support analog input.</p>
+<h3 id="analog-output--mostly-faked-via-pwm">Analog Output — Mostly Faked via PWM</h3>
+<p>Genuinely continuous analog output requires a <strong>DAC (Digital-to-Analog Converter)</strong> — present on some boards (ESP32 has 2 DAC-capable pins) but absent on many others (standard Arduino Uno has none at all).</p>
+<p><strong>What most "analog output" actually is: PWM (Pulse Width Modulation)</strong>. Instead of outputting a true intermediate voltage, the pin rapidly switches fully HIGH and fully LOW, and varies the <strong>proportion of time spent HIGH</strong> (the "duty cycle") to simulate an average voltage. A 50% duty cycle at 5V behaves, to a slow-responding load like an LED or DC motor, much like a steady 2.5V would — even though the pin itself is only ever truly at 0V or 5V.</p>
+<ul>
+<li><strong>LED brightness control</strong>: PWM duty cycle directly controls perceived brightness</li>
+<li><strong>DC motor speed control</strong>: exactly what your TB6612FNG's PWMA/PWMB inputs use — this is precisely why your ESP32 code uses <code>ledcWrite()</code> with a value from 0-255, setting the PWM duty cycle that determines motor speed</li>
+<li><strong>Servo control</strong>: technically a specific, precise PWM pulse <em>width</em> (not duty cycle in the same sense) tells a servo what angle to move to — the same underlying technique, applied slightly differently</li>
+</ul>
+<h3 id="quick-reference-table">Quick Reference Table</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>I/O Type</th>
+<th>What it does</th>
+<th>Example use</th>
+<th>Needs</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Digital Input</td>
+<td>Reads HIGH/LOW</td>
+<td>Button, switch, simple digital sensor</td>
+<td>Any GPIO pin</td>
+</tr>
+<tr class="even">
+<td>Digital Output</td>
+<td>Sets HIGH/LOW</td>
+<td>LED on/off, relay trigger</td>
+<td>Any GPIO pin</td>
+</tr>
+<tr class="odd">
+<td>Analog Input</td>
+<td>Reads a continuous voltage as a number</td>
+<td>Potentiometer, LDR light sensor, battery voltage monitoring</td>
+<td>An ADC-capable pin</td>
+</tr>
+<tr class="even">
+<td>Analog Output (PWM)</td>
+<td>Simulates a continuous output via fast switching</td>
+<td>LED dimming, motor speed, servo angle</td>
+<td>A PWM-capable pin (most GPIOs on ESP32; specific pins on Arduino)</td>
+</tr>
+<tr class="odd">
+<td>True Analog Output (DAC)</td>
+<td>Outputs a genuine, real intermediate voltage</td>
+<td>Audio signal generation, precise analog control voltages</td>
+<td>A DAC-capable pin (rare — check your specific board)</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="10-microcontrollers-arduino-esp32-raspberry-pi">10. Microcontrollers: Arduino, ESP32, Raspberry Pi</h2>
+<h3 id="arduino-eg-uno">Arduino (e.g., Uno)</h3>
+<ul>
+<li><strong>What it is</strong>: a simple microcontroller board — runs one program in an infinite loop, no operating system</li>
+<li><strong>Strengths</strong>: extremely beginner-friendly, huge community/tutorials, predictable real-time behavior (good for precise timing-critical tasks)</li>
+<li><strong>Limitations</strong>: 8-bit, slow clock speed (16MHz), very little RAM (2KB), no built-in WiFi/Bluetooth</li>
+<li><strong>Use when</strong>: you need simple, reliable, real-time control of motors/sensors/LEDs and don't need wireless connectivity or heavy computation</li>
+</ul>
+<h3 id="esp32">ESP32</h3>
+<ul>
+<li><strong>What it is</strong>: a more powerful microcontroller (32-bit, dual-core, 240MHz) with built-in WiFi and Bluetooth</li>
+<li><strong>Strengths</strong>: fast enough for more complex logic, wireless built in, more GPIO pins, hardware PWM channels, built-in ADC/DAC</li>
+<li><strong>Limitations</strong>: still a microcontroller — no operating system, no filesystem for complex software, can't run Python/vision libraries the way a full computer can</li>
+<li><strong>Use when</strong>: you need the reliability/real-time behavior of a microcontroller, but also want WiFi/Bluetooth connectivity, or need more processing headroom than Arduino provides — this is exactly why your robot build uses ESP32 for motor control rather than Arduino</li>
+</ul>
+<h3 id="raspberry-pi">Raspberry Pi</h3>
+<ul>
+<li><strong>What it is</strong>: a genuine, full computer — runs a real operating system (Linux), supports a filesystem, multitasking, and full programming language ecosystems (Python, etc.)</li>
+<li><strong>Strengths</strong>: can run computer vision (OpenCV, MediaPipe), machine learning models, complex decision-making software, connect to displays/cameras/USB peripherals like a normal PC</li>
+<li><strong>Limitations</strong>: not truly "real-time" (the OS can introduce unpredictable small delays), boots slower, more power-hungry, more expensive</li>
+<li><strong>Use when</strong>: you need actual "thinking" — vision processing, running trained models, complex logic, network services — exactly why your robot build uses the Pi for camera/gesture/voice, while the ESP32 handles the immediate motor control</li>
+</ul>
+<h3 id="quick-comparison">Quick Comparison</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Arduino</th>
+<th>ESP32</th>
+<th>Raspberry Pi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Type</td>
+<td>Microcontroller</td>
+<td>Microcontroller</td>
+<td>Full computer</td>
+</tr>
+<tr class="even">
+<td>OS</td>
+<td>None</td>
+<td>None (or RTOS)</td>
+<td>Linux</td>
+</tr>
+<tr class="odd">
+<td>Clock speed</td>
+<td>16MHz</td>
+<td>240MHz (dual-core)</td>
+<td>1.5-2.4GHz+ (multi-core)</td>
+</tr>
+<tr class="even">
+<td>WiFi/Bluetooth</td>
+<td>No</td>
+<td>Yes, built-in</td>
+<td>Yes, built-in</td>
+</tr>
+<tr class="odd">
+<td>Real-time reliability</td>
+<td>Excellent</td>
+<td>Very good</td>
+<td>Weaker (OS-dependent)</td>
+</tr>
+<tr class="even">
+<td>Can run Python/vision libraries</td>
+<td>No</td>
+<td>No (limited MicroPython only)</td>
+<td>Yes, fully</td>
+</tr>
+<tr class="odd">
+<td>Typical role in a robot</td>
+<td>Simple, dedicated tasks</td>
+<td>Motor/sensor control + wireless</td>
+<td>Vision, decision-making, networking</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="11-power-supply-fundamentals">11. Power Supply Fundamentals</h2>
+<h3 id="common-voltage-rails-and-why-they-exist">Common Voltage Rails and Why They Exist</h3>
+<ul>
+<li><strong>3.3V</strong>: standard logic level for most modern microcontrollers/sensors (ESP32, most modern ICs)</li>
+<li><strong>5V</strong>: standard for many older ICs, most servos, USB devices, Arduino Uno logic</li>
+<li><strong>12V</strong>: common for motors, fans, some LED strips, and as the "raw" rail from many battery packs before being stepped down</li>
+</ul>
+<h3 id="grounding--the-rule-that-prevents-90-of-mystery-bugs">Grounding — the Rule That Prevents 90% of Mystery Bugs</h3>
+<p><strong>Every part of your circuit that shares signals must share a common ground reference.</strong> If your battery, motor driver, and microcontroller each have separate, unconnected ground paths, signals won't read correctly (or at all) — this is the single most common cause of "my wiring looks right but nothing works" in beginner circuits, and it's the rule we've repeated throughout every wiring diagram in your robot and plane builds.</p>
+<h3 id="battery-chemistry-quick-reference">Battery Chemistry Quick Reference</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Nominal Voltage/Cell</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Li-ion (18650, etc.)</strong></td>
+<td>3.7V</td>
+<td>High energy density, needs a proper charger and BMS/protection circuit</td>
+</tr>
+<tr class="even">
+<td><strong>LiPo</strong></td>
+<td>3.7V</td>
+<td>Similar to Li-ion but flexible pouch form factor, needs balance charging on multi-cell packs</td>
+</tr>
+<tr class="odd">
+<td><strong>NiMH</strong></td>
+<td>1.2V</td>
+<td>Lower energy density, more tolerant of abuse, simpler charging</td>
+</tr>
+<tr class="even">
+<td><strong>Alkaline (non-rechargeable)</strong></td>
+<td>1.5V</td>
+<td>Simple, disposable, low power density</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="12-prototyping-tools--safety">12. Prototyping, Tools &amp; Safety</h2>
+<h3 id="essential-tools">Essential Tools</h3>
+<ul>
+<li><strong>Multimeter</strong>: measures voltage, current, resistance, continuity — the single most important diagnostic tool, used throughout this whole course for confirming buck converter outputs, checking speaker impedance, and verifying wiring before powering on</li>
+<li><strong>Breadboard</strong>: solderless prototyping — push components/wires into rows of connected holes, ideal for testing a circuit before committing to solder</li>
+<li><strong>Soldering iron</strong>: for permanent connections — necessary once a breadboard prototype is proven and you want a reliable, vibration-resistant final build</li>
+<li><strong>Wire strippers/cutters</strong>: for preparing wire ends cleanly</li>
+</ul>
+<h3 id="breadboard-basics">Breadboard Basics</h3>
+<p>The horizontal rows in the middle section are electrically connected in short strips (usually 5 holes); the outer rows (marked + and −) run the full length of the board and are meant for power/ground distribution. Components straddle the central gap to connect across the two half-sections.</p>
+<h3 id="common-beginner-mistakes-worth-knowing-upfront">Common Beginner Mistakes (Worth Knowing Upfront)</h3>
+<ol type="1">
+<li><strong>Reverse polarity</strong> on electrolytic capacitors or LEDs — check orientation before powering on</li>
+<li><strong>Missing common ground</strong> between separately-powered sections of a circuit</li>
+<li><strong>Skipping current-limiting resistors</strong> on LEDs — connecting an LED directly to a supply voltage without a resistor typically destroys it almost instantly</li>
+<li><strong>Using a standard (non-logic-level) MOSFET</strong> and expecting it to switch on fully from a 3.3V/5V microcontroller pin</li>
+<li><strong>Forgetting flyback diodes</strong> when switching motors/relays with a transistor</li>
+<li><strong>Not checking voltage with a multimeter before connecting a sensitive component</strong> — this single habit prevents the majority of "I fried my board" incidents</li>
+</ol>
+<hr />
+<h2 id="13-suggested-learning-path">13. Suggested Learning Path</h2>
+<ol type="1">
+<li><strong>Learn to read resistor color codes and capacitor markings</strong> until it's second nature — you'll be doing this constantly</li>
+<li><strong>Build Circuit 1 (LED + resistor) on a breadboard</strong> — the simplest possible complete circuit, confirms your basic tools and understanding work</li>
+<li><strong>Build Circuit 3 (pull-up + button)</strong> — introduces reading a digital input properly</li>
+<li><strong>Build Circuit 2 (voltage divider) with a light-dependent resistor (LDR)</strong>, read the result with a microcontroller's ADC — connects the analog world to digital code</li>
+<li><strong>Build Circuit 4 (555 timer astable)</strong> — understand timing/oscillation without a microcontroller, appreciate what your code's timing functions are actually replacing</li>
+<li><strong>Move to a microcontroller</strong> (start with Arduino for simplicity, or ESP32 if you know you'll want wireless) — reimplement Circuits 1 and 3 in code instead of pure hardware logic, compare the experience</li>
+<li><strong>Build a simple motor control circuit</strong> — either from individual MOSFETs (Circuit 5 concept) to understand the H-bridge principle, or with a pre-built driver module (TB6612FNG) to see the same principle packaged for real use — exactly the progression used in your own robot build</li>
+<li><strong>Add a Raspberry Pi</strong> once you have a working microcontroller-based project and want to add vision, voice, or complex decision-making on top — the same two-tier architecture used throughout your Sahayak robot and any future autonomous plane work</li>
+</ol>
+<p>This mirrors the same principle from the aeromodeling course: <strong>understand the fundamental building block before reaching for the pre-packaged solution</strong> — knowing why a decoupling capacitor, a flyback diode, or a pull-up resistor is there makes debugging someone else's (or your own) circuit vastly easier than treating every component as a magic black box.</p>
+
+<nav class="lesson-pager"><a class="pager-prev" href="robot-car-wiring.html"><span>Previous</span>Robot Car Wiring: ESP32 + Motor Driver + Sonar</a><a class="pager-next" href="motor-types.html"><span>Next</span>Motor Types: Brushed vs Coreless vs Brushless</a></nav>
+  </article>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap footer-inner"><span>Tinker Tribe</span><span id="year"></span></div></footer>
+<script src="../script.js"></script>
+</body>
+</html>

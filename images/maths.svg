@@ -1,0 +1,8 @@
+<svg viewBox="0 0 320 200" xmlns="http://www.w3.org/2000/svg"><rect width="320" height="200" rx="14" fill="#F6F2E8"/>
+<rect x="30" y="34" width="150" height="132" rx="10" fill="#17293B"/>
+<g font-family="Georgia, serif" font-size="30" fill="#F6F2E8" font-weight="bold">
+<text x="48" y="80">a² + b²</text><text x="48" y="122" fill="#D9A23B">= c²</text></g>
+<rect x="48" y="138" width="110" height="6" rx="3" fill="#3F7D6C"/>
+<path d="M210 150 L 290 150 L 210 60 Z" fill="none" stroke="#3F7D6C" stroke-width="5" stroke-linejoin="round"/>
+<rect x="210" y="136" width="14" height="14" fill="none" stroke="#3F7D6C" stroke-width="3"/>
+<g font-family="Georgia, serif" font-size="20" fill="#17293B" font-weight="bold"><text x="190" y="110">a</text><text x="244" y="174">b</text><text x="258" y="100" fill="#8A5E16">c</text></g></svg>

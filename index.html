@@ -9,15 +9,20 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
+<link rel="icon" type="image/svg+xml" href="tinkertribe-mark.svg">
 </head>
 <body>
 
 <header class="site-header">
   <div class="wrap header-inner">
-    <a href="#top" class="wordmark">Tinker Tribe</a>
+    <a href="#top" class="wordmark">
+      <img src="tinkertribe-full.svg" alt="Tinker Tribe" class="wordmark-logo">
+    </a>
     <nav class="main-nav" id="main-nav">
       <a href="#how">How it works</a>
       <a href="#topics">Topics</a>
+      <a href="#projects">Projects</a>
+      <a href="learn/index.html">Learn</a>
       <a href="#workshops">Workshops</a>
       <a href="#gallery">Gallery</a>
       <a href="#join" class="nav-cta">Join a workshop</a>
@@ -111,26 +116,126 @@
       <p class="section-lede">Start with one. New tracks get added as the faculty and content grow.</p>
       <div class="topic-grid">
         <article class="topic-card">
+          <img src="images/robotics.svg" alt="Illustration of a small wheeled robot" loading="lazy">
           <h3>Robotics</h3>
           <p>Build a small moving, reacting robot from motors, sensors and a microcontroller — no prior electronics needed.</p>
         </article>
         <article class="topic-card">
+          <img src="images/electronics.svg" alt="Illustration of an LED and resistor on a breadboard" loading="lazy">
           <h3>Electronics</h3>
           <p>LEDs, circuits, simple sensors — the building blocks that make everything else on this list possible.</p>
         </article>
         <article class="topic-card">
+          <img src="images/astronomy.svg" alt="Illustration of a night sky with moon, constellation and ringed planet" loading="lazy">
           <h3>Astronomy</h3>
-          <p>Stargazing nights, DIY telescope basics, and the kind of space facts that don't fit in a textbook.</p>
+          <p>Stargazing nights, spotting constellations and planets, and the kind of space facts that don't fit in a textbook.</p>
         </article>
         <article class="topic-card">
+          <img src="images/code-ai.svg" alt="Illustration of a code window next to a small neural network" loading="lazy">
           <h3>Code &amp; AI</h3>
           <p>Teach a program — or a robot — to respond to you. Block-based or simple Python, depending on age.</p>
+        </article>
+        <article class="topic-card">
+          <img src="images/quantum.svg" alt="Illustration of an atom with orbiting electrons" loading="lazy">
+          <h3>Quantum Curiosity</h3>
+          <p>Atoms, light and the weird rules of the very small — explained with experiments and stories, not equations.</p>
         </article>
         <article class="topic-card topic-card-more">
           <h3>More on the way</h3>
           <p>Have a topic you wish existed? Tell us on Instagram and it might be the next track we build.</p>
         </article>
       </div>
+    </div>
+  </section>
+
+  <section class="section" id="projects">
+    <div class="wrap">
+      <h2 class="section-heading">Things you'll build</h2>
+      <p class="section-lede">Every workshop ends with a real project that goes home with you. A few favourites:</p>
+      <div class="project-grid">
+        <article class="project-card">
+          <img src="images/telescope.svg" alt="Illustration of a telescope on a tripod" loading="lazy">
+          <div class="project-body">
+            <span class="project-tag">Astronomy</span>
+            <h3>DIY Telescope</h3>
+            <p>Assemble a simple telescope, learn how lenses bend light, then spot the Moon's craters on stargazing night.</p>
+          </div>
+        </article>
+        <article class="project-card">
+          <img src="images/esp32.svg" alt="Illustration of a Wi-Fi microcontroller board" loading="lazy">
+          <div class="project-body">
+            <span class="project-tag">Electronics · IoT</span>
+            <h3>ESP32 Weather Station</h3>
+            <p>Wire up temperature and humidity sensors and watch live readings from your room appear on your phone.</p>
+          </div>
+        </article>
+        <article class="project-card">
+          <img src="images/pi-project.svg" alt="Illustration of a single-board computer with a camera module" loading="lazy">
+          <div class="project-body">
+            <span class="project-tag">Robotics · AI</span>
+            <h3>Raspberry Pi Camera Bot</h3>
+            <p>Give a robot eyes — a camera that recognises faces and turns to say hello when you walk in.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section alt" id="learn">
+    <div class="wrap">
+      <h2 class="section-heading">Free lessons &amp; guides</h2>
+      <p class="section-lede">Can't wait for the next workshop? Start exploring now — 14 free lessons and printable guides, and growing.</p>
+      <div class="kb-grid">
+        <a class="kb-card cat-robotics" href="learn/robot-car-wiring.html">
+          <img class="kb-thumb" src="images/robotics.svg" alt="" loading="lazy">
+          <span class="kb-type">Lesson</span>
+          <span class="kb-cat">Robotics &amp; Electronics</span>
+          <h3>Robot Car Wiring: ESP32 + Motor Driver + Sonar</h3>
+          <p>How the workshop robot car is wired — power rails, motor driver pins, servo and sonar, with a printable diagram.</p>
+          <span class="kb-meta">Beginner · 2 min read</span>
+        </a>
+        <a class="kb-card cat-flight" href="learn/aeromodeling-course.html">
+          <img class="kb-thumb" src="images/drone.svg" alt="" loading="lazy">
+          <span class="kb-type">Lesson</span>
+          <span class="kb-cat">Flight &amp; Drones</span>
+          <h3>Aeromodeling: A Complete Course</h3>
+          <p>From paper planes to autonomous drones: the physics of flight, wing shapes, RC parts, motors and materials.</p>
+          <span class="kb-meta">Beginner → Advanced · 13 min read</span>
+        </a>
+        <a class="kb-card cat-space" href="learn/files/cosmic-almanac.pdf" target="_blank" rel="noopener">
+          <img class="kb-thumb" src="images/astronomy.svg" alt="" loading="lazy">
+          <span class="kb-type">Printable guide</span>
+          <span class="kb-cat">Space</span>
+          <h3>Cosmic Almanac</h3>
+          <p>Planets, moons, stars, galaxies and black holes, with distances in light-time so they're easy to compare.</p>
+          <span class="kb-meta">All ages · 8 pages · PDF</span>
+        </a>
+        <a class="kb-card cat-nature" href="learn/files/common-city-birds.pdf" target="_blank" rel="noopener">
+          <img class="kb-thumb" src="images/bird.svg" alt="" loading="lazy">
+          <span class="kb-type">Printable guide</span>
+          <span class="kb-cat">Nature &amp; Birds</span>
+          <h3>Common Indian City Birds</h3>
+          <p>Real photos plus field-mark sketches for the birds you see every day, and how to ID a bird in 20 seconds.</p>
+          <span class="kb-meta">Beginner · 9 pages · PDF</span>
+        </a>
+        <a class="kb-card cat-robotics" href="learn/electronics-fundamentals.html">
+          <img class="kb-thumb" src="images/electronics.svg" alt="" loading="lazy">
+          <span class="kb-type">Lesson</span>
+          <span class="kb-cat">Robotics &amp; Electronics</span>
+          <h3>Electronics Fundamentals</h3>
+          <p>Resistors, capacitors, transistors, regulators and filters — plus seven example circuits every builder should know.</p>
+          <span class="kb-meta">Beginner → Intermediate · 26 min read</span>
+        </a>
+        <a class="kb-card cat-maths" href="learn/files/mental-math-toolkit.pdf" target="_blank" rel="noopener">
+          <img class="kb-thumb" src="images/maths.svg" alt="" loading="lazy">
+          <span class="kb-type">Printable guide</span>
+          <span class="kb-cat">Maths</span>
+          <h3>Mental Math Toolkit</h3>
+          <p>Squares, cubes, tables and shortcuts that turn a 2-minute calculation into a 10-second one.</p>
+          <span class="kb-meta">Class 9–10 · 5 pages · PDF</span>
+        </a>
+      </div>
+      <div class="kb-teaser-actions"><a href="learn/index.html" class="btn btn-primary">Browse the full library</a></div>
     </div>
   </section>
 

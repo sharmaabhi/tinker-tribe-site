@@ -1,0 +1,38 @@
+<svg viewBox="0 0 700 200" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .ink { stroke: #17293B; }
+      .teal { stroke: #3F7D6C; }
+      .amber { stroke: #D9A23B; fill: #D9A23B; }
+      .amber-ink { stroke: #8A5E16; }
+      .wordmark { font-family: "Roboto Slab", Georgia, serif; font-weight: 700; fill: #17293B; }
+      .tagline { font-family: "IBM Plex Sans", Arial, sans-serif; font-weight: 500; fill: #3F7D6C; letter-spacing: 0.14em; }
+    </style>
+  </defs>
+
+  <!-- icon, reused from the mark -->
+  <g transform="translate(10,10)">
+    <circle cx="90" cy="90" r="88" fill="#EDE7D9"/>
+
+    <ellipse cx="90" cy="90" rx="69" ry="46" class="teal" fill="none" stroke-width="2" stroke-dasharray="2.5 5" transform="rotate(-18 90 90)"/>
+    <circle cx="142" cy="69" r="4" class="amber"/>
+
+    <g class="ink" fill="none" stroke-width="4" stroke-linecap="round">
+      <circle cx="90" cy="90" r="39"/>
+      <line x1="90" y1="45" x2="90" y2="34"/>
+      <line x1="90" y1="135" x2="90" y2="146"/>
+      <line x1="45" y1="90" x2="34" y2="90"/>
+      <line x1="135" y1="90" x2="146" y2="90"/>
+      <line x1="58" y1="58" x2="51" y2="51"/>
+      <line x1="122" y1="122" x2="129" y2="129"/>
+      <line x1="58" y1="122" x2="51" y2="129"/>
+      <line x1="122" y1="58" x2="129" y2="51"/>
+    </g>
+
+    <path d="M 96 69 L 78 96 L 90 96 L 84 112 L 105 84 L 91 84 Z" fill="#D9A23B" stroke="#8A5E16" stroke-width="4" stroke-linejoin="round"/>
+  </g>
+
+  <!-- wordmark -->
+  <text x="212" y="104" class="wordmark" font-size="50">TINKER TRIBE</text>
+  <text x="214" y="136" class="tagline" font-size="16">HANDS-ON STEM FOR CURIOUS KIDS</text>
+</svg>
