@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Robot Car Wiring: ESP32 + Motor Driver + Sonar — Tinker Tribe</title>
+<meta name="description" content="How the workshop robot car is wired — power rails, motor driver pins, servo and sonar, with a printable diagram.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="icon" type="image/svg+xml" href="../tinkertribe-mark.svg">
+<script data-goatcounter="https://tinkertribe.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="../index.html" class="wordmark"><img src="../tinkertribe-full.svg" alt="Tinker Tribe" class="wordmark-logo"></a>
+    <nav class="main-nav" id="main-nav">
+      <a href="../index.html#topics">Topics</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../learn/index.html">Learn</a>
+      <a href="../index.html#workshops">Workshops</a>
+      <a href="../index.html#join" class="nav-cta">Join a workshop</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main>
+<section class="lesson-hero cat-robotics">
+  <div class="wrap lesson-hero-grid">
+   <div>
+    <a class="back-link" href="index.html">← Knowledge library</a>
+    <span class="project-tag">Robotics &amp; Electronics</span>
+    <h1>Robot Car Wiring: ESP32 + Motor Driver + Sonar</h1>
+    <p class="lesson-lede">How the workshop robot car is wired — power rails, motor driver pins, servo and sonar, with a printable diagram.</p>
+    <div class="lesson-meta"><span>Beginner</span><span>2 min read</span></div>
+   </div>
+   <img class="lesson-hero-art" src="../images/robotics.svg" alt="">
+  </div>
+</section>
+<div class="wrap lesson-layout">
+  <aside class="lesson-toc"><p class="toc-title">On this page</p><ol><li><a href="#the-circuit-at-a-glance">The circuit at a glance</a></li><li><a href="#power-two-rails-one-ground">Power: two rails, one ground</a></li><li><a href="#esp32-pin-map">ESP32 pin map</a></li><li><a href="#one-safety-detail-the-sonar-echo-pin">One safety detail: the sonar echo pin</a></li><li><a href="#printable-version">Printable version</a></li><li><a href="#build-order-tips">Build order tips</a></li></ol></aside>
+  <article class="lesson-body">
+<p>This is the wiring for a simple robot base car — the same build kids start from in the robotics workshop. An <strong>ESP32</strong> is the brain, a <strong>TB6612FNG</strong> driver runs four wheel motors, a <strong>servo</strong> gives it a moving head or gripper, and an <strong>HC-SR04</strong> sonar lets it "see" obstacles. A Raspberry Pi can be added later as a smarter brain, talking to the ESP32 over serial.</p>
+<h2 id="the-circuit-at-a-glance">The circuit at a glance</h2>
+<p><img loading="lazy" src="diagrams/robot-car-circuit.svg" alt="Robot base car full circuit diagram" /></p>
+<h2 id="power-two-rails-one-ground">Power: two rails, one ground</h2>
+<p>The car runs on <strong>two 18650 cells in series (about 7.4V)</strong>, through a <strong>10A fuse</strong> and a <strong>master switch</strong>. From there the power splits:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Rail</th>
+<th>Voltage</th>
+<th>Feeds</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Motor rail</td>
+<td>7.4V direct from battery</td>
+<td>TB6612 <strong>VM</strong> pin (the motors)</td>
+</tr>
+<tr class="even">
+<td>Logic rail</td>
+<td>5V via an SY8205 buck converter</td>
+<td>ESP32, servo, sonar</td>
+</tr>
+<tr class="odd">
+<td>Ground</td>
+<td>Common</td>
+<td>Every GND point tied together</td>
+</tr>
+</tbody>
+</table></div>
+<p>Keeping motors and logic on separate rails stops motor noise from resetting the ESP32 — the number-one cause of robots that "randomly reboot". But all the grounds <strong>must</strong> be connected, or the control signals have no reference and nothing works.</p>
+<h2 id="esp32-pin-map">ESP32 pin map</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>ESP32 pin</th>
+<th>Goes to</th>
+<th>Job</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>GPIO13</td>
+<td>TB6612 STBY</td>
+<td>Enables the motor driver</td>
+</tr>
+<tr class="even">
+<td>GPIO25 / GPIO26</td>
+<td>AIN1 / AIN2</td>
+<td>Left motors direction</td>
+</tr>
+<tr class="odd">
+<td>GPIO27</td>
+<td>PWMA</td>
+<td>Left motors speed</td>
+</tr>
+<tr class="even">
+<td>GPIO32 / GPIO33</td>
+<td>BIN1 / BIN2</td>
+<td>Right motors direction</td>
+</tr>
+<tr class="odd">
+<td>GPIO14</td>
+<td>PWMB</td>
+<td>Right motors speed</td>
+</tr>
+<tr class="even">
+<td>GPIO18</td>
+<td>Servo signal</td>
+<td>Head / gripper position</td>
+</tr>
+<tr class="odd">
+<td>GPIO4</td>
+<td>Sonar Trig</td>
+<td>Sends the ping</td>
+</tr>
+<tr class="even">
+<td>GPIO5</td>
+<td>Sonar Echo (via divider)</td>
+<td>Hears the echo</td>
+</tr>
+<tr class="odd">
+<td>GPIO1 / GPIO3</td>
+<td>Pi RX / TX (later)</td>
+<td>Serial link to a Raspberry Pi</td>
+</tr>
+</tbody>
+</table></div>
+<p>The two left motors are paired on driver channel A (A01/A02) and the two right motors on channel B (B01/B02) — so the car steers like a tank, by spinning each side at a different speed.</p>
+<h2 id="one-safety-detail-the-sonar-echo-pin">One safety detail: the sonar echo pin</h2>
+<p>The HC-SR04's <strong>Echo pin outputs 5V</strong>, but ESP32 pins are <strong>3.3V maximum</strong>. Connecting it directly can damage the board over time. Put a simple <strong>voltage divider</strong> (for example a 1kΩ and a 2kΩ resistor) between Echo and GPIO5 to step the signal down to about 3.3V.</p>
+<h2 id="printable-version">Printable version</h2>
+<p>A high-resolution version of the same diagram, good for printing and keeping next to the build:</p>
+<p><img loading="lazy" src="diagrams/robot-car-circuit-v2.jpg" alt="Robot base car circuit, printable version" /></p>
+<h2 id="build-order-tips">Build order tips</h2>
+<ol type="1">
+<li>Wire the battery, fuse and switch first, and check the voltage with a multimeter before connecting anything else.</li>
+<li>Set the buck converter to 5V <strong>before</strong> plugging in the ESP32.</li>
+<li>Connect the motor driver and test one motor at a time.</li>
+<li>Add the servo, then the sonar (with its divider) last.</li>
+</ol>
+
+<nav class="lesson-pager"><span></span><a class="pager-next" href="electronics-fundamentals.html"><span>Next</span>Electronics Fundamentals</a></nav>
+  </article>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap footer-inner"><span>Tinker Tribe</span><span id="year"></span></div></footer>
+<script src="../script.js"></script>
+</body>
+</html>

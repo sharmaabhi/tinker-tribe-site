@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Motor Types: Brushed vs Coreless vs Brushless — Tinker Tribe</title>
+<meta name="description" content="Which motor goes in which project, and why each one needs a different kind of driver.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="icon" type="image/svg+xml" href="../tinkertribe-mark.svg">
+<script data-goatcounter="https://tinkertribe.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="../index.html" class="wordmark"><img src="../tinkertribe-full.svg" alt="Tinker Tribe" class="wordmark-logo"></a>
+    <nav class="main-nav" id="main-nav">
+      <a href="../index.html#topics">Topics</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../learn/index.html">Learn</a>
+      <a href="../index.html#workshops">Workshops</a>
+      <a href="../index.html#join" class="nav-cta">Join a workshop</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main>
+<section class="lesson-hero cat-robotics">
+  <div class="wrap lesson-hero-grid">
+   <div>
+    <a class="back-link" href="index.html">← Knowledge library</a>
+    <span class="project-tag">Robotics &amp; Electronics</span>
+    <h1>Motor Types: Brushed vs Coreless vs Brushless</h1>
+    <p class="lesson-lede">Which motor goes in which project, and why each one needs a different kind of driver.</p>
+    <div class="lesson-meta"><span>Beginner</span><span>4 min read</span></div>
+   </div>
+   <img class="lesson-hero-art" src="../images/motor.svg" alt="">
+  </div>
+</section>
+<div class="wrap lesson-layout">
+  <aside class="lesson-toc"><p class="toc-title">On this page</p><ol><li><a href="#the-core-distinction">The Core Distinction</a></li><li><a href="#1-regular-brushed-motor-with-iron-core">1. Regular Brushed Motor (with iron core)</a></li><li><a href="#2-coreless-brushed-motor">2. Coreless Brushed Motor</a></li><li><a href="#3-brushless-motor">3. Brushless Motor</a></li><li><a href="#quick-decision-guide">Quick Decision Guide</a></li><li><a href="#how-the-driver-requirement-differs--the-practical-takeaway">How the Driver Requirement Differs — the Practical Takeaway</a></li></ol></aside>
+  <article class="lesson-body">
+<p>A quick reference for choosing the right motor type — all three show up across robot and plane builds, so here's what actually distinguishes them.</p>
+<hr />
+<h2 id="the-core-distinction">The Core Distinction</h2>
+<p>All three are DC motors at heart, but they differ in <strong>how the rotor is built</strong> and <strong>how current gets switched to make it spin</strong>.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Regular Brushed</th>
+<th>Coreless Brushed</th>
+<th>Brushless</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Rotor construction</td>
+<td>Copper windings wound around an <strong>iron core</strong></td>
+<td>Copper windings with <strong>no iron core</strong> — just the windings themselves, hollow/cup-shaped</td>
+<td>No brushes at all — magnets on the rotor, windings fixed on the outside (stator)</td>
+</tr>
+<tr class="even">
+<td>How current reaches the rotor</td>
+<td>Physical carbon <strong>brushes</strong> contacting a spinning commutator</td>
+<td>Same — physical brushes and commutator</td>
+<td><strong>No physical contact</strong> — an ESC electronically switches current through the stationary windings</td>
+</tr>
+<tr class="odd">
+<td>Wires from motor</td>
+<td>2 (simple +/−, polarity determines direction)</td>
+<td>2 (same)</td>
+<td>3 (needs a matched ESC to drive)</td>
+</tr>
+</tbody>
+</table></div>
+<hr />
+<h2 id="1-regular-brushed-motor-with-iron-core">1. Regular Brushed Motor (with iron core)</h2>
+<p><strong>What it is</strong>: the classic, simplest DC motor — windings wrapped around a solid iron core, with brushes physically touching a rotating commutator to switch current direction as it spins.</p>
+<p><strong>Pros</strong>: cheap, simple, works with any basic driver (a plain H-bridge like your TB6612FNG/L298N), widely available.</p>
+<p><strong>Cons</strong>: the iron core adds real weight and rotational inertia (slower to speed up/ slow down), brushes physically wear out over time (limited lifespan), less efficient than the alternatives — some energy is lost to the core's magnetic resistance.</p>
+<p><strong>In your builds</strong>: your <strong>BO motors</strong> (ground robot) are this type — simple, cheap, good for learning/validating wiring and control logic before moving to something more capable.</p>
+<hr />
+<h2 id="2-coreless-brushed-motor">2. Coreless Brushed Motor</h2>
+<p><strong>What it is</strong>: same brush/commutator switching mechanism as a regular brushed motor, but the rotor's windings have <strong>no iron core</strong> — just a lightweight, hollow winding structure. This dramatically reduces rotor weight and rotational inertia.</p>
+<p><strong>Pros</strong>: much lighter, spins up and slows down almost instantly (very low inertia), more efficient than an iron-core brushed motor, genuinely tiny sizes are practical.</p>
+<p><strong>Cons</strong>: generally lower torque/power ceiling than an iron-core motor of similar size, brushes still wear out over time (shorter-lived than brushless), still needs a simple brushed-motor-style driver (though at much lower current than a full-size brushed motor).</p>
+<p><strong>In your builds</strong>: your <strong>8520 motor</strong> (plane build) is this type — exactly why it's the standard choice for tiny, weight-critical "slow flyer" aircraft. The near-zero rotational inertia also makes throttle response feel snappier despite the motor's small size.</p>
+<hr />
+<h2 id="3-brushless-motor">3. Brushless Motor</h2>
+<p><strong>What it is</strong>: flips the whole arrangement — permanent magnets are mounted on the rotor (the spinning part), and the windings are fixed on the outer stator (the stationary part). Since the windings don't move, there's no need for brushes at all — instead, an <strong>ESC electronically switches current</strong> through the three stator windings in a precise sequence to keep the rotor spinning (this sequencing is called "commutation").</p>
+<p><strong>Pros</strong>: no brushes to wear out (much longer lifespan), generally more efficient, much better power-to-weight ratio, handles higher speeds and higher power reliably.</p>
+<p><strong>Cons</strong>: needs a genuinely more complex driver (a brushless ESC, not a simple H-bridge), more expensive per motor, overkill for very small/low-power applications.</p>
+<p><strong>In your builds</strong>: your <strong>A2212/1400KV and MT2204/2300KV</strong> motors are this type — the step up in capability (and complexity) once you move beyond simple hobby-grade builds into more serious RC planes or drones.</p>
+<hr />
+<h2 id="quick-decision-guide">Quick Decision Guide</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>If you need...</th>
+<th>Choose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Cheapest option, simple wiring, don't mind some weight/inefficiency</td>
+<td>Regular brushed</td>
+</tr>
+<tr class="even">
+<td>Extremely light, tiny, fast throttle response, low power draw</td>
+<td>Coreless brushed</td>
+</tr>
+<tr class="odd">
+<td>Best efficiency, longest lifespan, higher power, willing to add ESC complexity</td>
+<td>Brushless</td>
+</tr>
+<tr class="even">
+<td>A first "just get it moving" test before committing to better hardware</td>
+<td>Regular brushed (cheapest to experiment with)</td>
+</tr>
+<tr class="odd">
+<td>A genuinely capable final RC plane or drone build</td>
+<td>Brushless</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="how-the-driver-requirement-differs--the-practical-takeaway">How the Driver Requirement Differs — the Practical Takeaway</h2>
+<ul>
+<li><strong>Regular brushed &amp; Coreless brushed</strong>: both use the <strong>same simple 2-wire driving approach</strong> — a basic H-bridge (TB6612FNG, L298N) or an even simpler single-direction brushed ESC (like your iFuturetech module) works for either. Swapping between a regular brushed motor and a coreless one on the same driver is a drop-in change.</li>
+<li><strong>Brushless</strong>: requires a purpose-built <strong>brushless ESC</strong> that understands 3-phase commutation — you cannot drive a brushless motor with a brushed-motor driver, and vice versa. This is exactly why brushless motors like the MT2204/A2212 need a completely different ESC (like the EMAX Lightning) than your 8520 coreless motor's simple brushed ESC.</li>
+</ul>
+
+<nav class="lesson-pager"><a class="pager-prev" href="electronics-fundamentals.html"><span>Previous</span>Electronics Fundamentals</a><a class="pager-next" href="aeromodeling-course.html"><span>Next</span>Aeromodeling: A Complete Course</a></nav>
+  </article>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap footer-inner"><span>Tinker Tribe</span><span id="year"></span></div></footer>
+<script src="../script.js"></script>
+</body>
+</html>

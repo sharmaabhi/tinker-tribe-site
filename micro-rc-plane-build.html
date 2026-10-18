@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Build a Micro RC Plane — Tinker Tribe</title>
+<meta name="description" content="Two complete foam-board plane builds with parts lists, weight budgets, cutting templates and wiring diagrams.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="icon" type="image/svg+xml" href="../tinkertribe-mark.svg">
+<script data-goatcounter="https://tinkertribe.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="../index.html" class="wordmark"><img src="../tinkertribe-full.svg" alt="Tinker Tribe" class="wordmark-logo"></a>
+    <nav class="main-nav" id="main-nav">
+      <a href="../index.html#topics">Topics</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../learn/index.html">Learn</a>
+      <a href="../index.html#workshops">Workshops</a>
+      <a href="../index.html#join" class="nav-cta">Join a workshop</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main>
+<section class="lesson-hero cat-flight">
+  <div class="wrap lesson-hero-grid">
+   <div>
+    <a class="back-link" href="index.html">← Knowledge library</a>
+    <span class="project-tag">Flight &amp; Drones</span>
+    <h1>Build a Micro RC Plane</h1>
+    <p class="lesson-lede">Two complete foam-board plane builds with parts lists, weight budgets, cutting templates and wiring diagrams.</p>
+    <div class="lesson-meta"><span>Intermediate</span><span>17 min read</span></div>
+   </div>
+   <img class="lesson-hero-art" src="../images/plane.svg" alt="">
+  </div>
+</section>
+<div class="wrap lesson-layout">
+  <aside class="lesson-toc"><p class="toc-title">On this page</p><ol><li><a href="#config-a--1s-coreless-platform">CONFIG A — 1S Coreless Platform</a></li><li><a href="#hardware-list">Hardware list</a></li><li><a href="#estimated-weight-budget-all-up">Estimated weight budget (all-up)</a></li><li><a href="#suggested-frame-design--config-a-standard-baseline-template">Suggested frame design — "Config A Standard" (baseline template)</a></li><li><a href="#motor-position--tractor-nose-vs-pusher-rear-vs-mid-mount">Motor position — tractor (nose) vs pusher (rear) vs mid-mount</a></li><li><a href="#recommendation-for-config-a-tractor-nose-mounted">Recommendation for Config A: tractor, nose-mounted</a></li><li><a href="#component-placement-front-to-back">Component placement (front to back)</a></li><li><a href="#center-of-gravity-cg--critical-check-before-every-first-flight-of-a-new-frame">Center of Gravity (CG) — critical, check before every first flight of a new frame</a></li><li><a href="#simple-cutting-layout-for-a-single-sheet-of-1-2mm-foam-board">Simple cutting layout (for a single sheet of ~1-2mm foam board)</a></li><li><a href="#control-linkage--pull-pull-thread-recommended-over-rigid-pushrods">Control linkage — pull-pull thread (recommended over rigid pushrods)</a></li><li><a href="#servo-placement">Servo placement</a></li><li><a href="#visual-references">Visual references</a></li><li><a href="#assembly-order">Assembly order</a></li><li><a href="#config-b--2s-3s-brushless-platform">CONFIG B — 2S-3S Brushless Platform</a></li><li><a href="#hardware-list-1">Hardware list</a></li><li><a href="#why-this-motoresc-pairing-makes-sense">Why this motor/ESC pairing makes sense</a></li><li><a href="#estimated-weight-budget-all-up-1">Estimated weight budget (all-up)</a></li><li><a href="#motor-position-nose-mounted-tractor-same-reasoning-as-config-a">Motor position: nose-mounted tractor (same reasoning as Config A)</a></li><li><a href="#suggested-frame--sized-for-a-445mm-wingspan-plane-or-a-similar-scale-scratch-build">Suggested frame — sized for a ~445mm-wingspan plane or a similar-scale scratch build</a></li><li><a href="#cg-for-this-size">CG for this size</a></li><li><a href="#key-differences-from-config-a-build-process">Key differences from Config A build process</a></li><li><a href="#future-upgrade-path--stabilization-gps-and-esp32-based-autonomy">FUTURE UPGRADE PATH — Stabilization, GPS, and ESP32-Based Autonomy</a></li><li><a href="#tier-1--off-the-shelf-gyro-stabilizer-simplest-plug-and-play">Tier 1 — Off-the-shelf gyro stabilizer (simplest, plug-and-play)</a></li><li><a href="#tier-2--diy-esp32-based-flight-controller-advanced-full-custom-control">Tier 2 — DIY ESP32-based flight controller (advanced, full custom control)</a></li><li><a href="#tier-3--commercial-fixed-wing-flight-controller-if-you-outgrow-diy">Tier 3 — Commercial fixed-wing flight controller (if you outgrow DIY)</a></li><li><a href="#suggested-overall-progression">Suggested overall progression</a></li></ol></aside>
+  <article class="lesson-body">
+<p>Two separate, reusable hardware "kits" — build multiple airframes around either one as you experiment with different frame shapes/sizes. Config A is the lighter, quieter, more indoor-friendly option. Config B uses common brushless hobby hardware, giving more power/speed at the cost of size, weight, and noise.</p>
+<hr />
+<h2 id="config-a--1s-coreless-platform">CONFIG A — 1S Coreless Platform</h2>
+<p>The lightweight, quiet, indoor-friendly platform. Best suited to small/light frames (~250-320mm wingspan class). This is the primary, fully-sourced kit.</p>
+<h2 id="hardware-list">Hardware list</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Spec</th>
+<th>Link</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Motor + Propeller</td>
+<td>8520 coreless motor (8.5x20mm) + 75mm 2-blade propeller, Set of 4 (2xCW+2xCCW)</td>
+<td><a target="_blank" rel="noopener" href="https://anilestore.com/product/8520-85x20mm-magnetic-micro-coreless-motor-with-75mm-propeller-set-of-4-pcs">Anil Electronic Store</a></td>
+</tr>
+<tr class="even">
+<td>ESC</td>
+<td>1S Brushed Motor Electric Speed Control Module, 3.5V-6V, 4A</td>
+<td><a target="_blank" rel="noopener" href="https://ifuturetech.org/product/1s-brushed-motor-electric-speed-control-module-3-5v-6v-4a/">iFuture Technology</a></td>
+</tr>
+<tr class="odd">
+<td>Servo</td>
+<td>GS-2502 digital micro servo, 2.2g, 3.7-6V, mini JST connector (x2 per plane — elevator + rudder)</td>
+<td><a target="_blank" rel="noopener" href="https://evelta.com/gs-2502-digital-micro-servo-2g-with-plastic-gear-for-rc-aircraft-drones/?sku=448-GS-2502">Evelta</a></td>
+</tr>
+<tr class="even">
+<td>Receiver</td>
+<td>FlySky FS2A-4CH, AFHDS 2A, ~1g</td>
+<td>Recommended</td>
+</tr>
+<tr class="odd">
+<td>Battery</td>
+<td>Bonka/Orange 3.7V 360mAh 25C 1S LiPo (x2 — one flying, one spare)</td>
+<td><a target="_blank" rel="noopener" href="https://robu.in/product-category/batteries/orange-lipo/1-cell-lipo-3-7v-4-2v/">Robu</a></td>
+</tr>
+<tr class="even">
+<td>Charger</td>
+<td>4-Port DC5V 1S Balance Charger</td>
+<td><a target="_blank" rel="noopener" href="https://robu.in/product/4-port-dc5v-1s-rc-lithium-lipo-battery-compact-balance-charger-rc-quadcopter/">Robu</a></td>
+</tr>
+<tr class="odd">
+<td>Transmitter</td>
+<td>FlySky FS-i6, 2.4GHz, 6CH</td>
+<td>Recommended</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="estimated-weight-budget-all-up">Estimated weight budget (all-up)</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Part</th>
+<th>Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Motor + prop</td>
+<td>~5-6g</td>
+</tr>
+<tr class="even">
+<td>ESC</td>
+<td>~2-3g</td>
+</tr>
+<tr class="odd">
+<td>2x servo</td>
+<td>~4.4g</td>
+</tr>
+<tr class="even">
+<td>Receiver</td>
+<td>~1g</td>
+</tr>
+<tr class="odd">
+<td>Battery (360mAh)</td>
+<td>~9-10g</td>
+</tr>
+<tr class="even">
+<td>Airframe + reinforcement</td>
+<td>~4-8g (depends on size/material)</td>
+</tr>
+<tr class="odd">
+<td><strong>Total</strong></td>
+<td><strong>~26-33g</strong></td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="suggested-frame-design--config-a-standard-baseline-template">Suggested frame design — "Config A Standard" (baseline template)</h2>
+<p>Use this as your default starting point; adjust ±20% freely once you're comfortable trimming.</p>
+<p><strong>Wing — two options, same total area (~18,200mm²), pick based on your priority</strong></p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Option 1: Efficient (higher aspect ratio)</th>
+<th>Option 2: Compact (lower aspect ratio)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Span</td>
+<td>280mm</td>
+<td><strong>220mm</strong></td>
+</tr>
+<tr class="even">
+<td>Chord</td>
+<td>65mm</td>
+<td><strong>83mm</strong></td>
+</tr>
+<tr class="odd">
+<td>Aspect ratio</td>
+<td>4.3:1</td>
+<td>2.65:1</td>
+</tr>
+<tr class="even">
+<td>Best for</td>
+<td>Best glide efficiency, most benefit from your limited-thrust motor</td>
+<td>Easier to store/transport/manage, more structurally rigid</td>
+</tr>
+<tr class="odd">
+<td>Tradeoff</td>
+<td>Wider footprint, slightly more flex-prone (leans more on the dihedral fold)</td>
+<td>A bit more drag for the same lift, asks slightly more of the motor</td>
+</tr>
+</tbody>
+</table></div>
+<p>Both are fully valid — pick Option 1 if squeezing the most flight performance out of the 8520/75mm combo matters most to you, or Option 2 if a smaller storage footprint and a stiffer wing matter more. Weight &amp; balance is calculated for both below, so either can be built with confidence.</p>
+<ul>
+<li>Airfoil: flat plate is fine; if you want a little more lift, add a slight curve by wetting and pre-bending the foam, or glue a thin bamboo skewer along the leading edge underside for a subtle undercamber</li>
+<li>Dihedral: bend each wing tip up ~10-15° from a centerline hinge (worth keeping on either option, for roll stability without needing ailerons)</li>
+</ul>
+<p><strong>Fuselage</strong></p>
+<ul>
+<li>Length (nose to tail): <strong>220mm</strong></li>
+<li>A simple flat strip, <strong>18-20mm wide</strong>, tapering slightly narrower toward the tail</li>
+<li>Motor firewall at the very nose (see Motor Mounting below)</li>
+</ul>
+<p><strong>Horizontal tail (elevator)</strong></p>
+<ul>
+<li>Span: <strong>90mm</strong>, chord: <strong>30mm</strong></li>
+<li>Hinge the rear <strong>12mm</strong> as the moving elevator surface (tape hinge, or thin uncut foam hinge)</li>
+</ul>
+<p><strong>Vertical tail (rudder)</strong></p>
+<ul>
+<li>Height: <strong>50mm</strong>, chord: <strong>35mm</strong></li>
+<li>Hinge the rear <strong>15mm</strong> as the moving rudder surface</li>
+</ul>
+<h2 id="motor-position--tractor-nose-vs-pusher-rear-vs-mid-mount">Motor position — tractor (nose) vs pusher (rear) vs mid-mount</h2>
+<p>Worth deciding deliberately, not defaulting blindly. Three real options:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Position</th>
+<th>How it works</th>
+<th>Pros</th>
+<th>Cons</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Tractor (nose-mounted, prop pulls from front)</strong></td>
+<td>Motor at the very front, prop faces forward, pulls the plane through the air</td>
+<td>Simplest to build, prop is clear of the wing/fuselage, most common/proven for a first build</td>
+<td>Prop is exposed at the front — first thing to hit the ground on a nose-down landing</td>
+</tr>
+<tr class="even">
+<td><strong>Pusher (rear-mounted, prop faces backward)</strong></td>
+<td>Motor at the tail, prop faces backward, pushes the plane</td>
+<td>Prop is protected from front-first crashes; keeps the nose clean for a camera/payload later</td>
+<td>Prop can strike the ground on tail-low landings; thrust line harder to align with CG; motor wiring runs the full fuselage length</td>
+</tr>
+<tr class="odd">
+<td><strong>Mid-mounted (motor partway back on the fuselage, still tractor orientation)</strong></td>
+<td>Same forward-facing prop, just moved back from the very tip of the nose</td>
+<td>Slightly better weight distribution if your nose is very light/short</td>
+<td>Prop wash passes directly over the fuselage/wing root, adds a little drag/turbulence — rarely worth it unless your specific frame shape demands it</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="recommendation-for-config-a-tractor-nose-mounted">Recommendation for Config A: <strong>tractor, nose-mounted</strong></h2>
+<p>For conventional airframes with a real forward nose/stick — <strong>nose-mounted tractor is the right, simplest choice</strong>. This is what the frame dimensions and firewall guidance above already assume. Reasons:</p>
+<ul>
+<li>Both airframes already have a defined nose area to reinforce (the firewall)</li>
+<li>Simplest wiring — motor/ESC sit right at the front, battery/receiver/servos trail back in a straight line, no wires running past the motor</li>
+<li>These are gentle "slow flyer" builds, not aggressive 3D/acrobatic planes — a pusher configuration's crash-protection benefit matters more for planes that get flown hard and crash often; for your gentle first builds, it's not worth the added complexity</li>
+</ul>
+<p><strong>Bottom line: mount the motor at the very front of the nose, prop facing forward (tractor), thrust line parallel to the fuselage</strong> — this is genuinely the standard, lowest-risk choice for a first powered conversion of a conventional glider shape like yours.</p>
+<h3 id="practical-mounting-steps">Practical mounting steps</h3>
+<ul>
+<li>Build the firewall from 2-3 laminated ice-cream sticks (glued in a small cross/plus shape for rigidity), glued into the very front of the nose — bare foam alone will work loose under motor vibration over time</li>
+<li>Check thrust line alignment from both <strong>top-down</strong> (prop shaft parallel to the fuselage centerline, not angled left/right) and <strong>side-on</strong> (not angled up/down) before final gluing</li>
+<li>Route the 2 motor wires straight back along the fuselage underside to the ESC, which sits just behind the firewall</li>
+</ul>
+<h2 id="component-placement-front-to-back">Component placement (front to back)</h2>
+<pre><code>[Motor + Prop] — [Firewall] — [ESC] — [Battery, velcro-mounted] — [Receiver] — [Rudder servo] — [Elevator servo] — [Tail]</code></pre>
+<p>Battery sits roughly <strong>at or just behind the wing's leading edge</strong> as a starting guess — this is your primary CG adjustment tool, so mount it on <strong>hook-and-loop tape, not glue</strong>.</p>
+<h2 id="center-of-gravity-cg--critical-check-before-every-first-flight-of-a-new-frame">Center of Gravity (CG) — critical, check before every first flight of a new frame</h2>
+<ul>
+<li>Target CG: <strong>~30% back from the wing's leading edge</strong> (measure the chord — 65mm chord means CG target is ~20mm back from the leading edge)</li>
+<li>Mark this point on both sides of the fuselage</li>
+<li>Support the plane gently at these two marks with fingertips (motor off) — it should hang level or very slightly nose-down</li>
+<li>Slide the battery forward (nose-heavy fix) or backward (tail-heavy fix) until it balances correctly. Do this before every maiden flight of a new frame — different foam/glue choices change the balance point.</li>
+</ul>
+<h3 id="weight--balance-calculation--both-wing-options">Weight &amp; balance calculation — both wing options</h3>
+<p>Since both servos sit near the tail, it's worth checking on paper whether they pull the balance too far back for the battery to compensate. Using estimated component masses/positions (nose = 0mm, tail = 220mm), with the wing mounted at the fuselage midpoint (110mm) in both cases:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th></th>
+<th>Option 1 (280x65mm)</th>
+<th>Option 2 (220x83mm)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Wing leading edge</td>
+<td>77.5mm from nose</td>
+<td>68.5mm from nose</td>
+</tr>
+<tr class="even">
+<td>Wing trailing edge</td>
+<td>142.5mm from nose</td>
+<td>151.5mm from nose</td>
+</tr>
+<tr class="odd">
+<td>Target CG (30% chord)</td>
+<td>97.0mm from nose</td>
+<td>93.4mm from nose</td>
+</tr>
+<tr class="even">
+<td>Non-battery CG (all parts except battery)</td>
+<td>85.7mm from nose</td>
+<td>85.7mm from nose</td>
+</tr>
+<tr class="odd">
+<td><strong>Required battery position</strong></td>
+<td><strong>121mm from nose</strong></td>
+<td><strong>~110mm from nose</strong></td>
+</tr>
+<tr class="even">
+<td>Battery position relative to wing</td>
+<td>44mm behind LE, 21mm ahead of TE — biased toward the rear of the wing</td>
+<td>41mm behind LE, 41mm ahead of TE — centered under the wing</td>
+</tr>
+</tbody>
+</table></div>
+<p>Fixed component table used for both calculations:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Mass</th>
+<th>Position from nose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Motor + 75mm prop</td>
+<td>5.5g</td>
+<td>8mm</td>
+</tr>
+<tr class="even">
+<td>Firewall</td>
+<td>1.0g</td>
+<td>12mm</td>
+</tr>
+<tr class="odd">
+<td>ESC</td>
+<td>2.5g</td>
+<td>25mm</td>
+</tr>
+<tr class="even">
+<td>Airframe (foam, distributed)</td>
+<td>6.0g</td>
+<td>100mm</td>
+</tr>
+<tr class="odd">
+<td>Receiver</td>
+<td>1.0g</td>
+<td>150mm</td>
+</tr>
+<tr class="even">
+<td>Rudder servo</td>
+<td>2.2g</td>
+<td>195mm</td>
+</tr>
+<tr class="odd">
+<td>Elevator servo</td>
+<td>2.2g</td>
+<td>205mm</td>
+</tr>
+<tr class="even">
+<td>Battery (solved for)</td>
+<td>9.5g</td>
+<td>see above</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Conclusion: both options are validated — the battery lands at a normal, achievable position under the wing either way, just biased slightly toward the rear for Option 1 versus centered for Option 2.</strong> Neither requires an extreme position or additional nose/tail weight to compensate.</p>
+<p><strong>Practical takeaway — battery velcro placement</strong>:</p>
+<ul>
+<li><strong>Option 1 (280x65mm)</strong>: size the velcro strip to span from the wing's leading edge to just short of its trailing edge, biased toward the rear half</li>
+<li><strong>Option 2 (220x83mm)</strong>: size the velcro strip to span the middle third of the wing's chord, centered</li>
+</ul>
+<p>Either way, this gets you in the right neighborhood — the physical hands-under-the-wing balance test (above) gets you the exact final position once real components are built in and weighed.</p>
+<h2 id="simple-cutting-layout-for-a-single-sheet-of-1-2mm-foam-board">Simple cutting layout (for a single sheet of ~1-2mm foam board)</h2>
+<p><strong>Option 1 (280x65mm wing):</strong></p>
+<pre><code>┌─────────────────────────────────────────────┐
+│                                               │
+│              WING (280 x 65mm)               │
+│                                               │
+├───────────────────────────────────────────────┤
+│  FUSELAGE STRIP (220 x 18-20mm, tapered)      │
+├──────────────────────┬────────────────────────┤
+│  H-TAIL (90 x 30mm)  │   V-TAIL (50 x 35mm)   │
+└──────────────────────┴────────────────────────┘</code></pre>
+<p>Cut from a ~300x120mm sheet.</p>
+<p><strong>Option 2 (220x83mm wing):</strong></p>
+<pre><code>┌─────────────────────────────────────┐
+│                                       │
+│         WING (220 x 83mm)            │
+│                                       │
+├───────────────────────────────────────┤
+│  FUSELAGE STRIP (220 x 18-20mm)      │
+├──────────────────┬────────────────────┤
+│ H-TAIL (90x30mm) │  V-TAIL (50x35mm) │
+└──────────────────┴────────────────────┘</code></pre>
+<p>Cut from a ~250x150mm sheet — a bit more compact overall despite the wider wing, since the span is shorter.</p>
+<p>Both leave enough spare margin on the sheet to redo a piece if a cut goes wrong.</p>
+<h2 id="control-linkage--pull-pull-thread-recommended-over-rigid-pushrods">Control linkage — pull-pull thread (recommended over rigid pushrods)</h2>
+<p>At this weight scale, a genuinely lighter and equally effective option than a rigid wire pushrod is <strong>pull-pull thread control</strong>:</p>
+<ul>
+<li>Glue a tiny stiff tab (a sliver of ice-cream stick works well) perpendicular to each control surface's hinge line — this is the <strong>control horn</strong></li>
+<li>Tie two threads (button thread, dental floss, or thin fishing line) from the servo arm: one to the top of the control horn, one to the bottom</li>
+<li>As the servo rotates one way, one thread pulls taut while the other slackens — this is what deflects the control surface, with <strong>no rigid rod anywhere in the system</strong></li>
+<li>Both threads must be taut with the surface centered (no slack) — tie one first, center everything, then tie the second snug against it. A tiny drop of CA glue on each knot stops slipping; trim excess thread after.</li>
+<li>Total added weight: a fraction of a gram — lighter than even a short wire pushrod</li>
+</ul>
+<p>See the pull-pull rudder diagram in the Visual references section for the exact geometry.</p>
+<h2 id="servo-placement">Servo placement</h2>
+<ul>
+<li>Mount each servo <strong>close to the control surface it operates</strong> — short thread runs mean less slack to manage and less wiring weight</li>
+<li><strong>Rudder servo</strong>: near the tail, just ahead of the vertical fin's hinge line, oriented so its arm rotates in the <strong>horizontal plane</strong> (servo body flat, shaft pointing up) to match the rudder's left-right motion</li>
+<li><strong>Elevator servo</strong>: right next to the rudder servo (both near the tail), oriented so its arm rotates in the <strong>vertical plane</strong> (servo body on its side, shaft pointing sideways) to match the elevator's up-down motion</li>
+<li>Hollow a small pocket in the foam sized to each servo body — friction-fit, with a small dab of glue at the edges if loose. Don't glue directly to unsupported flat foam; keep the servo case edges backed by surrounding structure.</li>
+<li>Route servo wires forward to the receiver along the fuselage side, not dangling loose</li>
+</ul>
+<p><strong>CG note</strong>: both servos sitting near the tail contribute to tail-heaviness — this is exactly why the battery (your heaviest single part) is mounted further forward on velcro, used as the primary CG fine-tuning tool once the servos are permanently glued in place.</p>
+<h2 id="visual-references">Visual references</h2>
+<p>The diagrams below are Option 1 (280x65mm wing) proportions — Option 2 (220x83mm) uses the same component layout and wiring, just with the shorter/wider wing shape from the table above.</p>
+<p><strong>Proportions + hardware overlay (top view + side view, dimensioned):</strong></p>
+<p><img loading="lazy" src="diagrams/config-a-proportions.svg" alt="Config A proportions with hardware overlay" /></p>
+<p><strong>Cutting template (straight vs. angled cut lines marked):</strong></p>
+<p><img loading="lazy" src="diagrams/config-a-cutting-template.svg" alt="Config A cutting template" /></p>
+<p><strong>Full system wiring diagram (motor/ESC/battery/receiver/servos, all connections):</strong></p>
+<p><img loading="lazy" src="diagrams/config-a-wiring-diagram.svg" alt="Config A full system wiring diagram" /></p>
+<p><strong>Pull-pull rudder control linkage detail:</strong></p>
+<p><img loading="lazy" src="diagrams/pull-pull-rudder-diagram.svg" alt="Pull-pull rudder control diagram" /></p>
+<h2 id="assembly-order">Assembly order</h2>
+<ol type="1">
+<li>Cut all 4 pieces</li>
+<li>Glue the firewall into the fuselage nose</li>
+<li>Glue the wing perpendicular to the fuselage at roughly its midpoint (adjust once CG is confirmed)</li>
+<li>Glue the tail pieces on at the rear, vertical tail perpendicular to horizontal tail</li>
+<li>Cut and hinge the elevator/rudder moving surfaces</li>
+<li>Mount motor, ESC, receiver, servos per the placement diagram</li>
+<li>Attach pull-pull threads from each servo to its control surface's horn (see Control linkage section above), tension and glue the knots</li>
+<li>Velcro the battery on, find CG, adjust</li>
+<li>Unpowered hand-glide test first, then first powered flight</li>
+</ol>
+<hr />
+<h2 id="config-b--2s-3s-brushless-platform">CONFIG B — 2S-3S Brushless Platform</h2>
+<p>Uses common brushless hobby hardware. More power, more speed, more noise — better suited to a slightly larger frame (~400-500mm class) and outdoor or larger indoor space flying.</p>
+<h2 id="hardware-list-1">Hardware list</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>Spec</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Motor</td>
+<td>Readytosky MT2204-2300KV (brushless)</td>
+<td>Recommended</td>
+</tr>
+<tr class="even">
+<td>ESC</td>
+<td>EMAX Lightning 20A BLHeli, 2-4S, no BEC</td>
+<td>Recommended — <a target="_blank" rel="noopener" href="https://rcmumbai.com/products/emax-lightningl-20a-esc">RC Mumbai</a></td>
+</tr>
+<tr class="odd">
+<td>Servo</td>
+<td>2x Tower Pro SG90, 9g</td>
+<td>Recommended</td>
+</tr>
+<tr class="even">
+<td>Receiver</td>
+<td>FlySky FS-iA6B, 6CH (more current headroom than FS2A, suits this higher-power build)</td>
+<td>Recommended</td>
+</tr>
+<tr class="odd">
+<td>Propeller</td>
+<td>Small 2-blade plane prop, ~5x3 or 6x4 (NOT multi-blade FPV racing props — those are wrong pitch/type for a plane; source a proper 2-blade wood or plastic prop sized for this motor/voltage)</td>
+<td>To source</td>
+</tr>
+<tr class="even">
+<td>Battery</td>
+<td>2S (7.4V) LiPo, ~450-850mAh, 25C+</td>
+<td>To source</td>
+</tr>
+<tr class="odd">
+<td>Separate BEC</td>
+<td>Since the EMAX ESC has <strong>no BEC</strong>, you need a small separate 5V UBEC to power the FS-iA6B receiver + 2 SG90 servos</td>
+<td>To source</td>
+</tr>
+<tr class="even">
+<td>Charger</td>
+<td>2S-capable balance charger (a 1S-only charger won't charge this — need a 2S-capable unit)</td>
+<td>To source</td>
+</tr>
+</tbody>
+</table></div>
+<h2 id="why-this-motoresc-pairing-makes-sense">Why this motor/ESC pairing makes sense</h2>
+<p>MT2204 at 2300KV on 2S (7.4V) gives a no-load speed around 17,000 RPM — right in the useful range for a small 2-blade prop on a foam plane this size, rather than the aggressive multi-blade racing props it currently wears. The EMAX Lightning 20A ESC is explicitly rated 2-4S, comfortably covering this voltage with plenty of current headroom (your motor will draw nowhere near 20A at this scale).</p>
+<h2 id="estimated-weight-budget-all-up-1">Estimated weight budget (all-up)</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Part</th>
+<th>Weight</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Motor</td>
+<td>~28-32g</td>
+</tr>
+<tr class="even">
+<td>ESC</td>
+<td>~5.5g</td>
+</tr>
+<tr class="odd">
+<td>2x SG90 servo</td>
+<td>~18g</td>
+</tr>
+<tr class="even">
+<td>Receiver</td>
+<td>~15g</td>
+</tr>
+<tr class="odd">
+<td>Separate BEC</td>
+<td>~3-5g</td>
+</tr>
+<tr class="even">
+<td>Battery (2S, ~500mAh)</td>
+<td>~35-45g</td>
+</tr>
+<tr class="odd">
+<td>Airframe + reinforcement</td>
+<td>~15-25g</td>
+</tr>
+<tr class="even">
+<td><strong>Total</strong></td>
+<td><strong>~120-150g</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>This is meaningfully heavier than Config A — expect faster flight, needs more room, and should really be flown outdoors in calm conditions or a large indoor hall, not a living room.</p>
+<h2 id="motor-position-nose-mounted-tractor-same-reasoning-as-config-a">Motor position: nose-mounted tractor (same reasoning as Config A)</h2>
+<p>The MT2204 is a standard tractor-configuration brushless motor (this is how it's already set up with its current FPV props) — keep this same orientation: <strong>nose-mounted, prop facing forward</strong>. No reason to switch to a pusher layout here either, for the same reasons as Config A (simpler build, matches a conventional glider-shaped airframe, gentler flying style doesn't need pusher's crash-protection benefit).</p>
+<h2 id="suggested-frame--sized-for-a-445mm-wingspan-plane-or-a-similar-scale-scratch-build">Suggested frame — sized for a ~445mm-wingspan plane or a similar-scale scratch build</h2>
+<p><strong>Wing</strong></p>
+<ul>
+<li>Span: <strong>445-460mm</strong> (typical for this class, or build fresh at this size)</li>
+<li>Chord: <strong>100-110mm</strong></li>
+<li>Add dihedral (~8-10° per side) for stability, same reasoning as Config A</li>
+</ul>
+<p><strong>Fuselage</strong></p>
+<ul>
+<li>Length: <strong>350-380mm</strong></li>
+<li>Width: <strong>30-35mm</strong>, tapering toward tail</li>
+<li>Firewall needs to be sturdier here given the heavier motor — laminate 3-4 ice-cream sticks, or use a small plywood scrap if available</li>
+</ul>
+<p><strong>Horizontal tail</strong></p>
+<ul>
+<li>Span: <strong>150mm</strong>, chord: <strong>45mm</strong>, hinge rear 18mm</li>
+</ul>
+<p><strong>Vertical tail</strong></p>
+<ul>
+<li>Height: <strong>80mm</strong>, chord: <strong>55mm</strong>, hinge rear 20mm</li>
+</ul>
+<h2 id="cg-for-this-size">CG for this size</h2>
+<ul>
+<li>Target: ~28-30% back from wing leading edge (chord 100-110mm → CG roughly 28-33mm back)</li>
+<li>Same balance-check procedure as Config A, just with this much heavier plane — support it more carefully, ideally with a helper, since a drop from carelessness matters more at this weight</li>
+</ul>
+<h2 id="key-differences-from-config-a-build-process">Key differences from Config A build process</h2>
+<ol type="1">
+<li><strong>No BEC on the ESC</strong> — you must wire in a separate UBEC between the battery and the receiver/servos, or the receiver won't power up at all</li>
+<li><strong>Charger</strong>: your 1S 4-port charger cannot charge a 2S pack — this needs a separate 2S-capable balance charger</li>
+<li><strong>Propeller</strong>: don't use multi-blade FPV quad props on the MT2204 — source a proper 2-blade prop sized for slower, plane-style thrust rather than racing-drone thrust</li>
+</ol>
+<hr />
+<h2 id="future-upgrade-path--stabilization-gps-and-esp32-based-autonomy">FUTURE UPGRADE PATH — Stabilization, GPS, and ESP32-Based Autonomy</h2>
+<p>Once you've got either config flying reliably on manual control, here are the real, verified paths to add gyro stabilization, GPS, and more autonomous behavior. Two tiers, from simple to advanced.</p>
+<h2 id="tier-1--off-the-shelf-gyro-stabilizer-simplest-plug-and-play">Tier 1 — Off-the-shelf gyro stabilizer (simplest, plug-and-play)</h2>
+<p>Dedicated tiny gyro stabilizers exist specifically for fixed-wing RC planes — e.g. the <strong>HobbyEagle A3 Pro V2</strong> or similar "3-axis gyro flight stabilizer" products, weighing around <strong>8g</strong>. These sit <strong>between your receiver and your servos/ESC</strong> in the signal chain:</p>
+<pre><code>Receiver → Gyro Stabilizer → Servos + ESC</code></pre>
+<p>You still fly manually with your transmitter — the gyro just smooths out unwanted oscillation/drift (wind gusts, etc.), and most have an adjustable "assist level" dial plus selectable flight modes (beginner/sport/3D). No coding required, no GPS, just improved manual-flight stability.</p>
+<p><strong>Weight impact</strong>: ~8g — noticeable on Config A (adds ~25-30% to total weight), much less significant on Config B. <strong>Best fit: Config B</strong>, or a slightly upsized Config A frame if you want to try it there.</p>
+<h2 id="tier-2--diy-esp32-based-flight-controller-advanced-full-custom-control">Tier 2 — DIY ESP32-based flight controller (advanced, full custom control)</h2>
+<p>This is a real, actively maintained open-source project: <strong>madflight</strong> — a flight controller toolbox for ESP32 / ESP32-S3 (also RP2040/STM32), explicitly supporting <strong>airplane</strong> flight mode alongside quadcopter/VTOL, with IMU sensor fusion, PID stabilization, GPS, barometer, magnetometer, and telemetry support. A functional flight controller can be built for <strong>under $10</strong> in parts using readily available dev boards and sensor breakouts.</p>
+<h3 id="what-youd-need">What you'd need</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Part</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>ESP32 or ESP32-S3 dev board</td>
+<td>Runs the madflight firmware</td>
+</tr>
+<tr class="even">
+<td>IMU sensor (MPU6050, or better ICM-42688-P/BMI270)</td>
+<td>Gyro + accelerometer — the core of stabilization</td>
+</tr>
+<tr class="odd">
+<td>GPS module (any standard NMEA/UBLOX module)</td>
+<td>Position hold, waypoint navigation (optional, adds real complexity)</td>
+</tr>
+<tr class="even">
+<td>Barometer (e.g. BMP280)</td>
+<td>Altitude hold (optional)</td>
+</tr>
+<tr class="odd">
+<td>BEC/DC-DC converter</td>
+<td>Powers the ESP32 board from your flight battery</td>
+</tr>
+<tr class="even">
+<td>Receiver</td>
+<td>madflight supports SBUS, CRSF, DSM, PPM, iBus — check the FS2A/FS-iA6B's output mode is one of these</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="where-it-sits-in-your-system">Where it sits in your system</h3>
+<pre><code>Receiver → ESP32 (madflight) → Servos (elevator/rudder) + ESC (throttle)
+                ↑
+         IMU (+ optional GPS, barometer)</code></pre>
+<p>The ESP32 intercepts your receiver's signals, blends them with sensor data (self-leveling, wind compensation, or full autonomous waypoint following if you add GPS), then outputs the corrected commands to your servos and ESC — same physical wiring endpoints as before, just with the ESP32 now in the middle doing the thinking.</p>
+<h3 id="realistic-weightcomplexity-for-your-two-configs">Realistic weight/complexity for your two configs</h3>
+<ul>
+<li><strong>Config A (1S coreless)</strong>: genuinely too much added weight/complexity for this featherweight class — an ESP32 + IMU + BEC would likely exceed your entire current all-up-weight target on its own. <strong>Not recommended for Config A.</strong></li>
+<li><strong>Config B (2S-3S brushless)</strong>: much more realistic here — you already have headroom in the weight budget, and 2S battery + separate BEC infrastructure is already part of this build. <strong>This is the config to actually try ESP32-based flight control on.</strong></li>
+</ul>
+<h3 id="setup-path-if-you-go-this-route">Setup path, if you go this route</h3>
+<ol type="1">
+<li>Get madflight running and calibrated on the bench first (IMU test, receiver signal test, servo/ESC test) — the project's own getting-started guide walks through this exact sequence</li>
+<li>Test in <strong>stabilized manual mode first</strong> (self-leveling assist, still fully pilot-controlled) — do not jump straight to GPS waypoint autonomy</li>
+<li>Only add GPS/autonomous modes once manual-stabilized flight is proven reliable across several flights</li>
+</ol>
+<h2 id="tier-3--commercial-fixed-wing-flight-controller-if-you-outgrow-diy">Tier 3 — Commercial fixed-wing flight controller (if you outgrow DIY)</h2>
+<p>If you eventually want a more capable, pre-built, better-documented option than a bare ESP32 + breakout sensors: boards like the <strong>Matek F722 WING</strong> (STM32-based, supports iNav/ArduPilot/ Betaflight firmware, dual IMU + barometer, GPS/telemetry ports, built specifically for fixed-wing UAVs) are a real, off-the-shelf step up — genuinely capable of long-range autonomous missions, but a bigger jump in cost, weight, and complexity than either of the above. This is really a "future, more serious build" option, well beyond either Config A or B's current scope — worth knowing it exists, not worth pursuing until you've outgrown the ESP32/madflight route.</p>
+<h2 id="suggested-overall-progression">Suggested overall progression</h2>
+<pre><code>Fly Config A manually (rudder+elevator, no stabilization)
+        ↓
+Fly Config B manually
+        ↓
+Add Tier 1 gyro stabilizer to Config B (still manual flight, just steadier)
+        ↓
+Build a dedicated Config B airframe + Tier 2 ESP32/madflight setup
+   (stabilized mode only, no GPS yet)
+        ↓
+Add GPS to the Tier 2 setup once stabilized flight is proven reliable
+        ↓
+(Optional, much later) Tier 3 commercial FC for serious autonomous missions</code></pre>
+<p>Don't skip steps — each tier assumes the previous one is already flying reliably. Adding GPS autonomy to a plane you haven't even trimmed and flown manually yet is a recipe for a lost or crashed aircraft, not a shortcut.</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Situation</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Indoor flying, small room, quiet</td>
+<td><strong>Config A</strong></td>
+</tr>
+<tr class="even">
+<td>Have brushless drone parts to reuse, okay with bigger/louder/needs more space</td>
+<td><strong>Config B</strong></td>
+</tr>
+<tr class="odd">
+<td>First-ever powered plane build, want the most forgiving option</td>
+<td><strong>Config A</strong></td>
+</tr>
+<tr class="even">
+<td>Want more speed/punch, flying outdoors or in a large hall</td>
+<td><strong>Config B</strong></td>
+</tr>
+</tbody>
+</table></div>
+<p>Both configs are designed to be <strong>frame-agnostic</strong> — once each hardware kit is assembled and tested on one airframe, you can build additional frames (different shapes, sizes ±20%, wing layouts) and swap the same electronics between them, as long as you stay roughly within the weight class each config is designed for.</p>
+
+<nav class="lesson-pager"><a class="pager-prev" href="aeromodeling-course.html"><span>Previous</span>Aeromodeling: A Complete Course</a><span></span></nav>
+  </article>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap footer-inner"><span>Tinker Tribe</span><span id="year"></span></div></footer>
+<script src="../script.js"></script>
+</body>
+</html>

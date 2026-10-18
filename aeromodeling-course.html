@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aeromodeling: A Complete Course — Tinker Tribe</title>
+<meta name="description" content="From paper planes to autonomous drones: the physics of flight, wing shapes, RC parts, motors and materials.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../styles.css">
+<link rel="icon" type="image/svg+xml" href="../tinkertribe-mark.svg">
+<script data-goatcounter="https://tinkertribe.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</head>
+<body>
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a href="../index.html" class="wordmark"><img src="../tinkertribe-full.svg" alt="Tinker Tribe" class="wordmark-logo"></a>
+    <nav class="main-nav" id="main-nav">
+      <a href="../index.html#topics">Topics</a>
+      <a href="../index.html#projects">Projects</a>
+      <a href="../learn/index.html">Learn</a>
+      <a href="../index.html#workshops">Workshops</a>
+      <a href="../index.html#join" class="nav-cta">Join a workshop</a>
+    </nav>
+    <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false"><span></span><span></span><span></span></button>
+  </div>
+</header>
+<main>
+<section class="lesson-hero cat-flight">
+  <div class="wrap lesson-hero-grid">
+   <div>
+    <a class="back-link" href="index.html">← Knowledge library</a>
+    <span class="project-tag">Flight &amp; Drones</span>
+    <h1>Aeromodeling: A Complete Course</h1>
+    <p class="lesson-lede">From paper planes to autonomous drones: the physics of flight, wing shapes, RC parts, motors and materials.</p>
+    <div class="lesson-meta"><span>Beginner → Advanced</span><span>13 min read</span></div>
+   </div>
+   <img class="lesson-hero-art" src="../images/drone.svg" alt="">
+  </div>
+</section>
+<div class="wrap lesson-layout">
+  <aside class="lesson-toc"><p class="toc-title">On this page</p><ol><li><a href="#1-introduction-to-aeromodeling">1. Introduction to Aeromodeling</a></li><li><a href="#2-the-physics-of-flight-basics">2. The Physics of Flight (Basics)</a></li><li><a href="#3-wing-shapes-tail-types--aircraft-configurations">3. Wing Shapes, Tail Types &amp; Aircraft Configurations</a></li><li><a href="#4-key-flight-characteristics">4. Key Flight Characteristics</a></li><li><a href="#5-paper-airplane-designs-hands-on-starting-point">5. Paper Airplane Designs (Hands-On Starting Point)</a></li><li><a href="#6-understanding-the-parts-of-an-rc-plane">6. Understanding the Parts of an RC Plane</a></li><li><a href="#7-motors--propulsion-systems">7. Motors &amp; Propulsion Systems</a></li><li><a href="#8-materials--construction-methods">8. Materials &amp; Construction Methods</a></li><li><a href="#9-advanced-fixed-wing-aircraft">9. Advanced Fixed-Wing Aircraft</a></li><li><a href="#10-multirotor-drones">10. Multirotor Drones</a></li><li><a href="#11-autonomous--ai-aircraft">11. Autonomous &amp; "AI" Aircraft</a></li><li><a href="#12-suggested-learning-path">12. Suggested Learning Path</a></li></ol></aside>
+  <article class="lesson-body">
+<hr />
+<h2 id="1-introduction-to-aeromodeling">1. Introduction to Aeromodeling</h2>
+<p>Aeromodeling is the hobby of designing, building, and flying model aircraft — ranging from a folded sheet of paper to GPS-guided autonomous drones. It sits at the intersection of physics, engineering, and craft, and it rewards understanding <em>why</em> something flies, not just following a build guide blindly.</p>
+<p>This course is organized to build knowledge progressively: physics first, then shapes and parts, then hands-on paper models, then real powered aircraft, then advanced and autonomous systems. Each section stands alone enough to reference later, but reading in order builds a coherent mental model.</p>
+<hr />
+<h2 id="2-the-physics-of-flight-basics">2. The Physics of Flight (Basics)</h2>
+<h3 id="the-four-forces">The Four Forces</h3>
+<p>Every aircraft, from a paper dart to a jumbo jet, is governed by the same four forces:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Force</th>
+<th>Direction</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Lift</strong></td>
+<td>Upward (perpendicular to airflow)</td>
+<td>Wing shape + speed of air over it</td>
+</tr>
+<tr class="even">
+<td><strong>Weight (Gravity)</strong></td>
+<td>Downward</td>
+<td>Mass of the aircraft</td>
+</tr>
+<tr class="odd">
+<td><strong>Thrust</strong></td>
+<td>Forward</td>
+<td>Motor/propeller, or hand-launch momentum</td>
+</tr>
+<tr class="even">
+<td><strong>Drag</strong></td>
+<td>Backward</td>
+<td>Air resistance against the aircraft's shape</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>For steady, level flight</strong>: Lift = Weight, and Thrust = Drag. Any imbalance causes climbing, diving, accelerating, or decelerating.</p>
+<h3 id="how-lift-actually-works">How Lift Actually Works</h3>
+<p>The classic explanation is Bernoulli's principle: air moving faster over the curved top of a wing has lower pressure than the slower-moving air underneath, creating a net upward force. A complementary and equally valid explanation is Newton's third law: the wing deflects air downward, and the reaction pushes the wing upward. Both are true simultaneously — they're different lenses on the same phenomenon, not competing theories.</p>
+<h3 id="angle-of-attack">Angle of Attack</h3>
+<p>The angle between the wing's chord line and the oncoming airflow. Increasing this angle increases lift — up to a point. Beyond a <strong>critical angle</strong>, airflow separates from the wing's upper surface and lift collapses. This is a <strong>stall</strong> — the single most important failure mode to understand and avoid, especially at low speed (takeoff, landing, sharp turns).</p>
+<h3 id="key-terms">Key Terms</h3>
+<ul>
+<li><strong>Chord</strong>: the front-to-back width of a wing, measured at any given point along the span</li>
+<li><strong>Span</strong>: wingtip to wingtip distance</li>
+<li><strong>Airfoil</strong>: the cross-sectional shape of a wing, viewed from the side</li>
+<li><strong>Camber</strong>: the curvature of an airfoil — more camber generally means more lift at low speed, at the cost of more drag</li>
+</ul>
+<hr />
+<h2 id="3-wing-shapes-tail-types--aircraft-configurations">3. Wing Shapes, Tail Types &amp; Aircraft Configurations</h2>
+<h3 id="wing-planform-shapes">Wing Planform Shapes</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Shape</th>
+<th>Characteristics</th>
+<th>Common Use</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Rectangular</strong></td>
+<td>Simple to build, forgiving stall behavior, moderate efficiency</td>
+<td>Trainers, beginner builds</td>
+</tr>
+<tr class="even">
+<td><strong>Tapered</strong></td>
+<td>Narrower at the tip than the root — better efficiency, slightly trickier stall behavior</td>
+<td>Sport planes, many scale models</td>
+</tr>
+<tr class="odd">
+<td><strong>Elliptical</strong></td>
+<td>Most aerodynamically efficient shape theoretically, but hardest to build</td>
+<td>Classic WWII fighters (Spitfire), rarely used in hobby builds due to complexity</td>
+</tr>
+<tr class="even">
+<td><strong>Delta</strong></td>
+<td>Wide triangular shape, very stable at a range of speeds, low aspect ratio</td>
+<td>Fast jets, some flying wings</td>
+</tr>
+<tr class="odd">
+<td><strong>Swept</strong></td>
+<td>Wingtips angled backward</td>
+<td>High-speed aircraft, reduces drag at speed</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="aspect-ratio--the-single-most-important-wing-number">Aspect Ratio — The Single Most Important Wing Number</h3>
+<p><strong>Aspect Ratio = Span² ÷ Wing Area</strong> (or approximately Span ÷ Average Chord for a simple rectangular wing)</p>
+<ul>
+<li><strong>High aspect ratio</strong> (long, narrow wings): efficient, glides well, less drag — gliders and slow-flyers use this</li>
+<li><strong>Low aspect ratio</strong> (short, wide wings): more structurally rigid, more maneuverable, more drag — aerobatic and combat aircraft use this</li>
+</ul>
+<h3 id="tail-configurations">Tail Configurations</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Layout</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Conventional</strong></td>
+<td>Horizontal stabilizer + vertical fin, standard "T" from behind</td>
+<td>Most common, well-understood handling</td>
+</tr>
+<tr class="even">
+<td><strong>T-Tail</strong></td>
+<td>Horizontal stabilizer mounted on top of the vertical fin</td>
+<td>Keeps tail clear of wing wake, common on gliders</td>
+</tr>
+<tr class="odd">
+<td><strong>V-Tail</strong></td>
+<td>Two angled surfaces replace separate horizontal/vertical tails, combining elevator+rudder function</td>
+<td>Lighter, less drag, slightly more complex control mixing</td>
+</tr>
+<tr class="even">
+<td><strong>Flying Wing</strong></td>
+<td>No separate tail at all — the wing itself provides all control</td>
+<td>Very efficient, but pitch stability is harder to achieve; needs careful design (sweep, reflex airfoil)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="fuselage-types">Fuselage Types</h3>
+<ul>
+<li><strong>Pod-and-boom</strong>: a compact body (pod) with a thin boom extending back to the tail — common on gliders and trainers, lightweight</li>
+<li><strong>Full fuselage</strong>: a complete body shape, often for scale-realistic models</li>
+<li><strong>Flat-plate (foam board)</strong>: the simplest DIY construction — flat sheet fuselage, functional rather than realistic (this is what your own foam builds use)</li>
+</ul>
+<hr />
+<h2 id="4-key-flight-characteristics">4. Key Flight Characteristics</h2>
+<h3 id="center-of-gravity-cg">Center of Gravity (CG)</h3>
+<p>The point at which the aircraft's weight is balanced. For most conventional designs, CG sits at roughly <strong>25-33% back from the wing's leading edge</strong>. Too far forward = nose heavy, hard to get the nose up; too far back = tail heavy, unstable, prone to stalling unpredictably.</p>
+<h3 id="dihedral">Dihedral</h3>
+<p>The upward angle of the wings when viewed from the front (a shallow "V" shape). Dihedral adds <strong>roll stability</strong> — if the plane banks unintentionally, dihedral naturally helps level it back out. This is especially valuable on simple planes without ailerons (rudder-only or elevator+rudder-only designs), since it substitutes for active roll control.</p>
+<h3 id="wing-loading">Wing Loading</h3>
+<p><strong>Wing Loading = Weight ÷ Wing Area</strong></p>
+<p>Lower wing loading = slower flying speed, gentler stall, more floaty character (good for beginners and indoor flying). Higher wing loading = faster, more responsive, but less forgiving. This is why a heavier plane with the same wing needs to fly faster to generate enough lift — directly relevant to why battery/component weight matters so much on small builds.</p>
+<h3 id="stability-vs-maneuverability--a-fundamental-tradeoff">Stability vs. Maneuverability — A Fundamental Tradeoff</h3>
+<p>Every design decision trades off between these two. A stable plane (docile, self- correcting, good for beginners) is inherently less maneuverable. A highly maneuverable plane (aerobatic, agile) is inherently less forgiving of pilot error. There's no "best" setting — only what's appropriate for the plane's intended purpose and pilot skill level.</p>
+<hr />
+<h2 id="5-paper-airplane-designs-hands-on-starting-point">5. Paper Airplane Designs (Hands-On Starting Point)</h2>
+<p>Paper planes are the fastest, cheapest way to <em>feel</em> these principles before committing to a powered build. Three designs, each teaching something different:</p>
+<h3 id="design-1-the-dart">Design 1: The Dart</h3>
+<p>A narrow, pointed design (fold a sheet in half lengthwise, fold the top corners into the center crease repeatedly to form a sharp point, then fold the wings down along the body). <strong>Teaches</strong>: low aspect ratio + high wing loading = fast, far-flying, but not very stable in gusty air.</p>
+<h3 id="design-2-the-glider-wide-wing">Design 2: The Glider (Wide-Wing)</h3>
+<p>Wider wings, blunter nose, often with small upturned wingtips (a paper equivalent of dihedral). <strong>Teaches</strong>: higher aspect ratio + dihedral = slower, more stable, better glide ratio (distance traveled per unit of height lost).</p>
+<h3 id="design-3-the-delta-wing">Design 3: The Delta Wing</h3>
+<p>A simple triangular shape, folded from a square or rectangular sheet into a wide triangle with a center spine. <strong>Teaches</strong>: how a delta shape achieves stability across a wide range of speeds without a separate tail — the same principle used in real delta-wing aircraft.</p>
+<p><strong>Suggested exercise</strong>: build all three from the same size paper, throw each the same way, and observe the difference in distance, stability, and glide angle. This is a genuine, hands-on demonstration of aspect ratio and wing loading — cheaper and faster than any powered experiment.</p>
+<hr />
+<h2 id="6-understanding-the-parts-of-an-rc-plane">6. Understanding the Parts of an RC Plane</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Part</th>
+<th>Function</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Wing</strong></td>
+<td>Generates lift</td>
+</tr>
+<tr class="even">
+<td><strong>Fuselage</strong></td>
+<td>Structural body, houses electronics/battery</td>
+</tr>
+<tr class="odd">
+<td><strong>Horizontal Stabilizer / Elevator</strong></td>
+<td>Controls pitch (nose up/down)</td>
+</tr>
+<tr class="even">
+<td><strong>Vertical Fin / Rudder</strong></td>
+<td>Controls yaw (nose left/right)</td>
+</tr>
+<tr class="odd">
+<td><strong>Ailerons</strong> (on the wing, if present)</td>
+<td>Controls roll (banking left/right)</td>
+</tr>
+<tr class="even">
+<td><strong>Motor</strong></td>
+<td>Provides thrust</td>
+</tr>
+<tr class="odd">
+<td><strong>ESC (Electronic Speed Controller)</strong></td>
+<td>Regulates power delivered to the motor based on throttle input</td>
+</tr>
+<tr class="even">
+<td><strong>Propeller</strong></td>
+<td>Converts motor rotation into thrust</td>
+</tr>
+<tr class="odd">
+<td><strong>Servo</strong></td>
+<td>Small motor that moves control surfaces (elevator, rudder, ailerons) based on receiver signals</td>
+</tr>
+<tr class="even">
+<td><strong>Receiver</strong></td>
+<td>Receives radio signals from the transmitter, outputs corresponding servo/ESC commands</td>
+</tr>
+<tr class="odd">
+<td><strong>Transmitter</strong></td>
+<td>The pilot's handheld radio control unit</td>
+</tr>
+<tr class="even">
+<td><strong>Battery</strong></td>
+<td>Power source — almost always LiPo for RC aircraft due to high power-to-weight ratio</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="control-surface-effects-summarized">Control Surface Effects, Summarized</h3>
+<ul>
+<li><strong>Elevator up</strong> → nose pitches up → climb (or stall if too abrupt/slow)</li>
+<li><strong>Elevator down</strong> → nose pitches down → dive</li>
+<li><strong>Rudder left/right</strong> → yaws the nose left/right (also assists turning on rudder-only planes)</li>
+<li><strong>Aileron left/right</strong> → banks the plane, the primary way real turns are coordinated on aileron-equipped planes</li>
+</ul>
+<hr />
+<h2 id="7-motors--propulsion-systems">7. Motors &amp; Propulsion Systems</h2>
+<h3 id="motor-types">Motor Types</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Characteristics</th>
+<th>Best For</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Coreless brushed</strong></td>
+<td>Very light, low power, low cost</td>
+<td>Ultra-micro indoor planes</td>
+</tr>
+<tr class="even">
+<td><strong>Standard brushed (with iron core)</strong></td>
+<td>Cheap, simple, less efficient, motor wears out faster</td>
+<td>Toy-grade and entry builds</td>
+</tr>
+<tr class="odd">
+<td><strong>Brushless</strong></td>
+<td>No brushes to wear out, higher efficiency, more power-dense</td>
+<td>Almost all serious RC planes and drones today</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="understanding-kv-rating-brushless-motors">Understanding KV Rating (Brushless Motors)</h3>
+<p><strong>KV = RPM per volt applied</strong>, with no load. A 2300KV motor on a 2S (7.4V) battery spins at roughly 2300 × 7.4 ≈ 17,000 RPM unloaded.</p>
+<ul>
+<li><strong>High KV</strong> (e.g., 2500KV+): spins fast, pairs with small/lightweight propellers — common on small, fast planes and racing drones</li>
+<li><strong>Low KV</strong> (e.g., under 1000KV): spins slower but with more torque, pairs with large propellers — common on larger, slower-flying planes</li>
+</ul>
+<h3 id="propeller-sizing-basics">Propeller Sizing Basics</h3>
+<p>Propellers are specified as <strong>diameter × pitch</strong> (e.g., "8×6" = 8 inches diameter, 6 inches of theoretical forward travel per rotation).</p>
+<ul>
+<li><strong>Larger diameter</strong>: more thrust at low speed, but more drag and higher current draw</li>
+<li><strong>Higher pitch</strong>: more speed potential, but more strain on the motor (like a higher gear on a bicycle)</li>
+<li>Motor and propeller must be matched — an underpowered motor with too large/high-pitch a prop will overheat or stall; an oversized motor with too small a prop wastes potential power</li>
+</ul>
+<h3 id="electric-ducted-fans-edf-and-other-propulsion">Electric Ducted Fans (EDF) and Other Propulsion</h3>
+<p>For scale jet-look models, an EDF (a shrouded fan, rather than an open propeller) simulates a jet engine's look and sound, at the cost of efficiency compared to an open prop. Glow (nitro-fuel) and gas engines exist for larger, traditional hobby aircraft but are far less common for beginners today given the convenience of electric power.</p>
+<hr />
+<h2 id="8-materials--construction-methods">8. Materials &amp; Construction Methods</h2>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Material</th>
+<th>Properties</th>
+<th>Use Case</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>EPP Foam</strong></td>
+<td>Very durable, crash-resistant, slightly heavier</td>
+<td>Trainers, durable park flyers</td>
+</tr>
+<tr class="even">
+<td><strong>Depron / Foam board</strong></td>
+<td>Light, cheap, easy to cut with a hobby knife</td>
+<td>DIY scratch-builds, beginner-friendly</td>
+</tr>
+<tr class="odd">
+<td><strong>Balsa wood</strong></td>
+<td>Very light, traditional material, needs more skill/time to build and finish</td>
+<td>Classic kit builds, scale models</td>
+</tr>
+<tr class="even">
+<td><strong>Carbon fiber (rods/plates)</strong></td>
+<td>Extremely stiff and light, but expensive</td>
+<td>Reinforcement in high-performance builds</td>
+</tr>
+<tr class="odd">
+<td><strong>3D printed (PLA/PETG)</strong></td>
+<td>Precise, repeatable, good for complex small parts (mounts, brackets)</td>
+<td>Motor mounts, custom fittings, not usually entire airframes (too heavy in bulk)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>General principle</strong>: every gram matters disproportionately on small aircraft. A material choice that's "slightly heavier but stronger" is often the wrong tradeoff on a small indoor plane, but the right one on a larger, more robust outdoor design.</p>
+<hr />
+<h2 id="9-advanced-fixed-wing-aircraft">9. Advanced Fixed-Wing Aircraft</h2>
+<h3 id="aerobatic-planes">Aerobatic Planes</h3>
+<p>Designed for 3D flight (hovering, tumbling, extreme maneuvers) — typically low wing loading combined with high power-to-weight ratio, symmetrical airfoils (equal lift capability upside-down as right-side-up), and large control surface deflections.</p>
+<h3 id="fpv-first-person-view-planes">FPV (First-Person-View) Planes</h3>
+<p>Equipped with an onboard camera transmitting live video to the pilot's goggles or screen, allowing "flying from the cockpit" perspective without needing to see the actual aircraft. Requires a video transmitter, camera, and a separate receiver/goggle system alongside the normal RC control link.</p>
+<h3 id="scale-models">Scale Models</h3>
+<p>Built to accurately represent a real aircraft's proportions, often with retractable landing gear, detailed panel lines, and sometimes multiple engines — prioritizes realism over pure flight performance.</p>
+<h3 id="gliders--soaring-planes">Gliders / Soaring Planes</h3>
+<p>Extremely high aspect ratio wings, minimal drag, often unpowered (winch-launched or hand-tossed) or with a small motor just to gain initial altitude before switching off and soaring on thermals (rising warm air currents) — a specialized, skill-intensive discipline in its own right.</p>
+<hr />
+<h2 id="10-multirotor-drones">10. Multirotor Drones</h2>
+<p>A fundamentally different flight principle from fixed-wing aircraft: instead of a wing generating lift from forward airflow, multiple motors with propellers generate direct vertical thrust, and flight control comes entirely from varying each motor's speed.</p>
+<h3 id="common-configurations">Common Configurations</h3>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Type</th>
+<th>Motor Count</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Tricopter</strong></td>
+<td>3</td>
+<td>Rare, needs a servo-tilted rear motor for yaw control</td>
+</tr>
+<tr class="even">
+<td><strong>Quadcopter</strong></td>
+<td>4</td>
+<td>Most common — simple, efficient, widely supported</td>
+</tr>
+<tr class="odd">
+<td><strong>Hexacopter</strong></td>
+<td>6</td>
+<td>More redundancy (can survive one motor failure), more lift capacity</td>
+</tr>
+<tr class="even">
+<td><strong>Octocopter</strong></td>
+<td>8</td>
+<td>Maximum lift capacity and redundancy, used for heavy-lift/cinema drones</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="key-components-beyond-what-fixed-wing-planes-use">Key Components (Beyond What Fixed-Wing Planes Use)</h3>
+<ul>
+<li><strong>Flight Controller (FC)</strong>: a small onboard computer with a gyroscope and accelerometer, constantly adjusting each motor's speed many times per second to keep the drone stable — this is the component that makes multirotor flight possible at all, since a human cannot manually balance 4+ motors in real time</li>
+<li><strong>ESCs (one per motor)</strong>: unlike a single-motor plane, drones need one ESC per motor, often combined onto a single "4-in-1 ESC" board for quadcopters</li>
+<li><strong>Frame</strong>: the structural X or H-shaped body holding all motors at fixed positions</li>
+</ul>
+<h3 id="why-drones-are-easier-to-fly-but-harder-to-build-well">Why Drones Are Easier to Fly (But Harder to Build Well)</h3>
+<p>The flight controller's automatic stabilization means a beginner can hover a drone almost immediately, unlike a fixed-wing plane which requires understanding stall speed, banking, and continuous small corrections. However, building/tuning a multirotor (motor matching, ESC calibration, flight controller PID tuning) is arguably more technically involved than a simple fixed-wing build.</p>
+<hr />
+<h2 id="11-autonomous--ai-aircraft">11. Autonomous &amp; "AI" Aircraft</h2>
+<h3 id="what-autonomous-actually-means-here">What "Autonomous" Actually Means Here</h3>
+<p>Rather than a human continuously operating the controls, the aircraft uses sensors and onboard logic to fly some or all of a mission itself. This spans a wide range:</p>
+<div class="table-scroll"><table>
+<thead>
+<tr class="header">
+<th>Level</th>
+<th>Capability</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Stabilization only</strong></td>
+<td>Gyro/accelerometer smooths pilot input, still fully manually flown</td>
+</tr>
+<tr class="even">
+<td><strong>Altitude/Position Hold</strong></td>
+<td>Aircraft holds a set altitude or GPS position without constant pilot correction</td>
+</tr>
+<tr class="odd">
+<td><strong>Waypoint Navigation</strong></td>
+<td>Pilot sets GPS points on a map; aircraft flies the route autonomously</td>
+</tr>
+<tr class="even">
+<td><strong>Full autonomy / obstacle avoidance</strong></td>
+<td>Aircraft uses cameras/sensors (computer vision) to detect and react to its environment without pre-programmed waypoints</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="the-core-hardware-stack">The Core Hardware Stack</h3>
+<ul>
+<li><strong>Flight Controller running real autopilot firmware</strong>: open-source options like <strong>ArduPilot</strong> and <strong>PX4</strong> (running on hardware like a Pixhawk, or the Matek F722 boards we discussed for a fixed-wing build) provide the actual autonomous flight logic — PID control loops, navigation, failsafe behavior</li>
+<li><strong>GPS module</strong>: provides absolute position, essential for waypoint navigation and return-to-home functionality</li>
+<li><strong>IMU (Inertial Measurement Unit)</strong>: gyroscope + accelerometer (sometimes + magnetometer and barometer) for orientation and altitude sensing</li>
+<li><strong>Companion computer</strong> (optional, for genuine "AI" behavior): a small onboard computer (like a Raspberry Pi or an NVIDIA Jetson) running computer vision models — object detection, obstacle avoidance, visual navigation — that sends high-level commands to the flight controller, which still handles the actual low-level flight stabilization</li>
+</ul>
+<h3 id="the-two-brain-architecture-same-principle-as-a-ground-robot">The Two-Brain Architecture (Same Principle as a Ground Robot)</h3>
+<p>This mirrors exactly the same "ESP32 handles reflexes, Pi handles thinking" split discussed for ground robots:</p>
+<pre><code>Companion computer (Pi/Jetson): camera, object detection, high-level decisions
+              │
+              ▼ (sends simple commands: &quot;move to X,Y&quot; or &quot;avoid obstacle&quot;)
+Flight Controller (ArduPilot/PX4): actual motor/servo control, stabilization, safety</code></pre>
+<p>The flight controller should always retain final authority over safety-critical behavior (failsafe, battery voltage cutoffs, stabilization) — the same principle as keeping obstacle-avoidance reflexes on the ESP32 rather than solely dependent on a higher-level, potentially slower or disconnected companion computer.</p>
+<h3 id="diy-entry-points">DIY Entry Points</h3>
+<ul>
+<li><strong>madflight</strong> (ESP32-based, open source): a genuinely accessible way to build a basic autonomous flight controller from cheap parts, supporting fixed-wing mode with IMU stabilization and optional GPS</li>
+<li><strong>ArduPilot / PX4 on dedicated hardware</strong> (Pixhawk-class boards, or Matek F-series): the more mature, capable, and widely-supported path once you outgrow a DIY board</li>
+</ul>
+<hr />
+<h2 id="12-suggested-learning-path">12. Suggested Learning Path</h2>
+<ol type="1">
+<li><strong>Fold and fly the three paper plane designs</strong> — build direct intuition for aspect ratio, wing loading, and stability with zero cost or risk</li>
+<li><strong>Build a simple foam glider, unpowered</strong> — hand-launch only, focus purely on CG and trim, no motor/electronics complexity yet</li>
+<li><strong>Add basic power</strong> (a cheap coreless or brushed motor setup) — introduce throttle control, understand how thrust interacts with the airframe</li>
+<li><strong>Move to a proper brushless-powered plane</strong> with full 3-axis control (elevator, rudder, ailerons) — this is "graduating" to a genuinely capable RC aircraft</li>
+<li><strong>Explore one advanced direction based on interest</strong>: aerobatics, FPV, scale modeling, or gliding/soaring</li>
+<li><strong>If drones interest you</strong>: start with a small, cheap quadcopter kit to learn multirotor-specific concepts (PID tuning, flight controller setup) before attempting a scratch-build</li>
+<li><strong>If autonomy interests you</strong>: start with adding GPS/altitude-hold to an already reliably-flying manual aircraft — never attempt autonomous features on an unproven airframe or control setup</li>
+</ol>
+<p>This mirrors the same principle used throughout this course: <strong>each stage should be proven and reliable before adding the next layer of complexity</strong> — the single most important practical lesson in aeromodeling, whether building a paper dart or a GPS-guided autonomous plane.</p>
+
+<nav class="lesson-pager"><a class="pager-prev" href="motor-types.html"><span>Previous</span>Motor Types: Brushed vs Coreless vs Brushless</a><a class="pager-next" href="micro-rc-plane-build.html"><span>Next</span>Build a Micro RC Plane</a></nav>
+  </article>
+</div>
+</main>
+<footer class="site-footer"><div class="wrap footer-inner"><span>Tinker Tribe</span><span id="year"></span></div></footer>
+<script src="../script.js"></script>
+</body>
+</html>
